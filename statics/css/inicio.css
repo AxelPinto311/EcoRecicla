@@ -1,0 +1,139 @@
+:root {
+    --primario: #16A34A; /* Azul */
+    --background: #F0FDF4;
+  }
+.section_titulo{
+    background-color: #EEFDF3;
+    padding-bottom: 5%;
+}
+.titulo .container-col-texto{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.texto_titulo_container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.texto_titulo_container h2{
+    font-weight: 700;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+}
+.texto_titulo_container .text_unete{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    margin-bottom: 2rem;
+    margin-top: 2%;
+}
+.texto_titulo_container .btn_registrar{
+   font-weight: 500;
+   font-size: 1.125rem;
+    line-height: 1.75rem;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: var(--primario);
+}
+.titulo .cuadros_container{
+    display: flex;
+    justify-content: center;
+}
+.titulo .cuadros_container .card{
+    width: 100%;
+}
+.titulo .cuadros_container .card .card-body .card-title{
+   color: var(--primario);
+}
+.section_sobre_nosotros{
+    background-color: var(--background);
+    padding-bottom: 2%;
+}
+.section_sobre_nosotros .sobre_nosotros_text_container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 5%;
+    margin-top: 2%;
+    
+}
+.section_sobre_nosotros .sobre_nosotros_text_container i{
+    font-size: 60px;
+    color: var(--primario);
+}
+.section_sobre_nosotros .sobre_nosotros_text_container h3{
+    margin-top: 3%;
+    font-weight: 700;
+}
+.section_sobre_nosotros .sobre_nosotros_info_container{
+    margin-top: 5%;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 5%;
+    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+}
+.section_sobre_nosotros .sobre_nosotros_info_container h4{
+color: var(--primario);
+}
+.section_sobre_nosotros .sobre_nosotros_info_container p{
+    margin-top: 5%;
+    
+}
+.mapa_verde_section .mapa_verde_container{
+    display: flex;
+    justify-content: center;
+    padding-top: 2%;
+}
+.mapa_verde_section .mapa_verde_text_container{
+    text-align: center;
+}
+.mapa_verde_section .mapa_verde_text_container h3{
+    font-weight: 700;
+}
+.mapa_verde_section .mapa_verde_text_container p{
+    margin-top: 2%;
+}
+.mapa_verde_section .mapa_verde_btn_container{
+    text-align: center;
+    padding-top: 5%;
+}
+.mapa_verde_section .mapa_verde_btn_container button{
+    background-color: var(--primario);
+    color: white;
+}
+.contactanos_section{
+    margin-top: 5%;
+    padding-top: 2%;
+    background-color: var(--background);
+}
+.contactanos_section .contactanos_text_container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.contactanos_section .contactanos_text_container i{
+    font-size: 60px;
+    color: var(--primario);
+}
+.contactanos_section .contactanos_text_container h3{
+    font-weight: 700;
+    margin-top: 2%;
+}
+.contactanos_section .contactanos_text_container p{
+    margin-top: 2%;
+}
+.contactanos_section .info_contacto_container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.contactanos_section .info_contacto_container i{
+    font-size: 40px;
+    color: var(--primario);
+}
+.contactanos_section .info_contacto_container p{
+    font-weight: 600;
+    margin-top: 2%;
+}

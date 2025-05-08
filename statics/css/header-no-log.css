@@ -1,0 +1,24 @@
+:root {
+    --primario: #16A34A; /* Azul */
+    /*--secondary-color: #dc3545; /* Rojo */
+  }
+header{
+    font-family: sans-serif!important;
+}
+.ul_container{
+    flex-grow: 0!important;
+}
+.ul_container ul{
+    align-items: center;
+}
+.navbar .ecorecicla_log{
+    font-weight: 700;
+    color: var(--primario);
+}
+.ul_container ul li{
+    font-weight: 500;
+}
+.ul_container ul li a button{
+    background-color: var(--primario);
+    color: white;
+}
