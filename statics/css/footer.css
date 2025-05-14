@@ -1,0 +1,36 @@
+/* FOOTER ------------------*/
+.contactanos_section{
+    
+    padding-top: 10%;
+    background-color: var(--background);
+}
+.contactanos_section .contactanos_text_container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.contactanos_section .contactanos_text_container i{
+    font-size: 60px;
+    color: var(--primario);
+}
+.contactanos_section .contactanos_text_container h3{
+    font-weight: 700;
+    margin-top: 2%;
+}
+.contactanos_section .contactanos_text_container p{
+    margin-top: 2%;
+}
+.contactanos_section .info_contacto_container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.contactanos_section .info_contacto_container i{
+    font-size: 40px;
+    color: var(--primario);
+}
+.contactanos_section .info_contacto_container p{
+    font-weight: 600;
+    margin-top: 2%;
+}
+/* FOOTER ------------------*/

@@ -1,0 +1,41 @@
+body{
+    font-family: sans-serif;
+}
+:root {
+    --primario: #16A34A; /* Azul */
+    --background: #F0FDF4;
+  }
+main{
+    background-color: var(--background);
+}
+.row .col-md-12 .filtro_container .btn{
+    background-color: white;
+    border: 1px #dee2e0 solid;
+}
+.row .col-md-12 .filtro_container .btn.active {
+    background-color: var(--primario); /* Color verde cuando está activo */
+    color: white; /* Color del texto cuando está activo */
+}
+.row .col-md-5 .botones_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.row .col-md-5 .botones_container .boton_ver_mapa{
+    background-color: #fff;
+    font-weight: 400;
+    border: 1px #dee2e0 solid;
+}
+.row .col-md-5 .botones_container .boton_ver_mapa:hover{
+    background-color: var(--primario);
+    color: white;
+}
+.row .col-md-5 .botones_container .boton_nueva_publicacion{
+    background-color: var(--primario);
+    font-weight: 400;
+    border: 1px #dee2e0 solid;
+    color: white;
+}
+.row .col-md-3{
+    margin-top: 5%;
+}

@@ -1,7 +1,29 @@
+
 :root {
     --primario: #16A34A; /* Azul */
     --background: #F0FDF4;
   }
+
+::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra */
+}
+
+/* Estilo para el track (fondo de la barra) */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color del fondo */
+}
+
+/* Estilo para el thumb (la parte que se mueve) */
+::-webkit-scrollbar-thumb {
+    background: var(--primario); /* Color rojo */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Opcional: Cambiar el color del thumb al pasar el mouse */
+::-webkit-scrollbar-thumb:hover {
+    background: gray; /* Color rojo oscuro */
+
+}
 .section_titulo{
     background-color: #EEFDF3;
     padding-bottom: 5%;
@@ -81,6 +103,9 @@ color: var(--primario);
     margin-top: 5%;
     
 }
+.mapa_verde_section{
+    padding-bottom:5%;
+}
 .mapa_verde_section .mapa_verde_container{
     display: flex;
     justify-content: center;
@@ -103,6 +128,7 @@ color: var(--primario);
     background-color: var(--primario);
     color: white;
 }
+/* FOOTER ------------------
 .contactanos_section{
     margin-top: 5%;
     padding-top: 2%;
@@ -137,3 +163,4 @@ color: var(--primario);
     font-weight: 600;
     margin-top: 2%;
 }
+ FOOTER ------------------*/
