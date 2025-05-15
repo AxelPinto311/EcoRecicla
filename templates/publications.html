@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../statics/css/header-log.css">
   <link rel="stylesheet" href="../statics/css/publications.css">
+  <link rel="stylesheet" href="../statics/css/header-log.css">
+ 
   <link rel="stylesheet" href="../statics/css/footer.css">
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -34,23 +35,21 @@
         <div class="collapse navbar-collapse ul_container" id="navbarScroll">
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <button class="btn boton_ver_mapa"> <i class="bi bi-geo-alt"></i> Ver Mapa</button>
+              <button class="btn boton_ver_mapa"><a class="nav-link" href="#contacto"><i class="bi bi-geo-alt"></i> Ver Mapa</a> </button>
             </li>
             <li class="nav-item">
-              <button class="btn boton_nueva_publicacion">+ Nueva Publicación</button>
+              <button class="btn boton_nueva_publicacion">+Nueva Publicación</button>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contacto">Contacto</a>
+            <li class="nav-item ">
+              <button class="btn btn_contacto"><a class="nav-link" href="#contacto">Contacto</a>  </button>
             </li>
             <li class="nav-item">
               <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle boton_nueva_publicacion" type="button"
-                  data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn dropdown-toggle btn_name_user" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Axel Pinto
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#">Cerrar sesion</a></li>
-
                 </ul>
               </div>
             </li>
@@ -62,7 +61,7 @@
   <main>
     <section>
       <div class="container">
-       /* <div class="row">
+       <!--- <div class="row">
           <div class="col-md-7">
             <div class="buscador_container">
               <div class="input-group mb-3">
@@ -89,7 +88,7 @@
 
             </div>
           </div>
-        </div> <-- !->
+        </div>-->
         <div class="row">
           <div class="col-md-12">
             <div class="filtro_container">
@@ -107,7 +106,7 @@
         <div class="row">
           <div class="col-md-3">
             <div class="card">
-              <img src="../statics/img/anohana2.jpg" class="card-img-top" alt="...">
+              <img src="../statics/img/lote_aluminion.png" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Lata de cerveza</h5>
                 <p class="card-text tipo_material">Tipo de material: Aluminio metal</p>
@@ -118,7 +117,7 @@
           </div>
           <div class="col-md-3">
             <div class="card">
-              <img src="../statics/img/anohana2.jpg" class="card-img-top" alt="...">
+              <img src="../statics/img/lote_aluminion.png" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Lata de cerveza</h5>
                 <p class="card-text tipo_material">Tipo de material: Aluminio metal</p>
@@ -129,7 +128,7 @@
           </div>
           <div class="col-md-3">
             <div class="card">
-              <img src="../statics/img/anohana2.jpg" class="card-img-top" alt="...">
+              <img src="../statics/img/lote_aluminion.png" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Lata de cerveza</h5>
                 <p class="card-text tipo_material">Tipo de material: Aluminio metal</p>
@@ -140,7 +139,7 @@
           </div>
           <div class="col-md-3">
             <div class="card">
-              <img src="../statics/img/anohana2.jpg" class="card-img-top" alt="...">
+              <img src="../statics/img/lote_aluminion.png" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Lata de cerveza</h5>
                 <p class="card-text tipo_material">Tipo de material: Aluminio metal</p>
@@ -151,7 +150,7 @@
           </div>
           <div class="col-md-3">
             <div class="card">
-              <img src="../statics/img/anohana2.jpg" class="card-img-top" alt="...">
+              <img src="../statics/img/lote_aluminion.png" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Lata de cerveza</h5>
                 <p class="card-text tipo_material">Tipo de material: Aluminio metal</p>
@@ -162,7 +161,7 @@
           </div>
           <div class="col-md-3">
             <div class="card">
-              <img src="../statics/img/anohana2.jpg" class="card-img-top" alt="...">
+              <img src="../statics/img/lote_aluminion.png" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Lata de cerveza</h5>
                 <p class="card-text tipo_material">Tipo de material: Aluminio metal</p>
@@ -171,7 +170,17 @@
               </div>
             </div>
           </div>
+          <div class="col-md-3">
+            <div class="card">
+              <img src="../statics/img/lote_aluminion.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Lata de cerveza</h5>
+                <p class="card-text tipo_material">Tipo de material: Aluminio metal</p>
+                <p class="card-text precio_card">Precio $333</p>
 
+              </div>
+            </div>
+          </div>
         </div>
         <div class="row" id="resultadosContainer">
           <!-- Aquí se insertarán dinámicamente las cards -->
