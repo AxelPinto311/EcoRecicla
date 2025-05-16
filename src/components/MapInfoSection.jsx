@@ -33,13 +33,9 @@ function MapInfoSection() {
                 ></iframe>
               </div>
               <div className="mapa_verde_btn_container_hero">
-                {/* Si es una ruta interna de React: */}
                 <Link to="/mapa-completo" className="btn btn_mapa_completo_hero">
                      Ver Mapa Completo
                 </Link>
-                {/* Si es un link externo o una funcionalidad diferente:
-                <button className="btn btn_mapa_completo_hero">Ver Mapa Completo</button>
-                */}
               </div>
             </div>
           </div>
