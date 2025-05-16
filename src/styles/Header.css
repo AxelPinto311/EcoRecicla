@@ -1,0 +1,138 @@
+header {
+  font-family: sans-serif !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container-fluid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand.ecorecicla_log {
+  font-weight: 700;
+  color: var(--primario);
+  font-size: 1.5rem;
+}
+
+/* Estilos para el buscador (cuando está logueado) */
+.buscador_container {
+  width: 40%;
+  margin: 0 15px;
+}
+
+@media (max-width: 991.98px) {
+  .buscador_container {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .ul_container {
+     padding-top: 10px;
+  }
+}
+
+.ul_container {
+  flex-grow: 0 !important;
+}
+
+.ul_container ul {
+  align-items: center;
+  width: auto;
+  gap: 10px;
+}
+
+.ul_container .nav-item {
+  font-weight: 500;
+}
+
+/* Botones específicos cuando está logueado */
+.ul_container .boton_ver_mapa,
+.ul_container .btn_contacto {
+  background-color: var(--background);
+  font-weight: 400;
+  border: 1px var(--borde-claro) solid;
+  color: var(--texto-principal);
+  padding: 0.375rem 0.75rem;
+}
+ .ul_container .boton_ver_mapa svg {
+     margin-right: 5px;
+ }
+
+
+.ul_container .boton_ver_mapa:hover,
+.ul_container .btn_contacto:hover {
+  background-color: #e9ecef;
+}
+
+.ul_container .boton_nueva_publicacion,
+.ul_container .btn_name_user {
+  background-color: var(--primario);
+  font-weight: 400;
+  border: 1px var(--borde-claro) solid;
+  color: var(--blanco);
+  padding: 0.375rem 0.75rem;
+}
+ .ul_container .boton_nueva_publicacion:hover,
+ .ul_container .btn_name_user:hover {
+     background-color: #148a3f;
+ }
+
+.dropdown .dropdown-menu {
+  position: absolute;
+  background-color: var(--blanco);
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: .25rem;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.175);
+  z-index: 1000;
+}
+
+.dropdown .dropdown-menu.show {
+  display: block;
+}
+
+.dropdown .dropdown-item {
+  display: block;
+  width: 100%;
+  padding: .5rem 1rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.dropdown .dropdown-item:hover {
+  color: #1e2125;
+  background-color: #e9ecef;
+}
+
+
+/* Botón de iniciar sesión (cuando no está logueado) */
+.ul_container .btn_iniciar_sesion {
+  background-color: var(--primario);
+  color: var(--blanco);
+  font-weight: 500;
+  padding: 0.375rem 0.75rem;
+}
+ .ul_container .btn_iniciar_sesion:hover {
+     background-color: #148a3f;
+ }
+
+.navbar-nav .nav-link {
+    color: var(--texto-principal);
+}
+.navbar-nav .nav-link:hover {
+    color: var(--primario);
+}
+ .ul_container .nav-item .nav-link button.btn {
+     display: block;
+ }
+ .ul_container .nav-item > .nav-link {
+     padding-top: .5rem;
+     padding-bottom: .5rem;
+ }

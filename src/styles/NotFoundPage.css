@@ -1,0 +1,71 @@
+.not-found-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+    padding: 20px;
+    color: #333;
+  }
+  
+  .not-found-content h1 {
+    font-size: 6em;
+    font-weight: bold;
+    color: #17803d;
+    margin-bottom: 0;
+    line-height: 1;
+  }
+  
+  .not-found-content h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .not-found-content p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 30px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Estilo para el enlace que parece botón */
+  .home-link-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .home-link-button:hover {
+    background-color: #218838;
+    text-decoration: none;
+    color: white;
+  }
+  
+  /* Ajustes para móvil */
+  @media (max-width: 540px) {
+    .not-found-content h1 {
+      font-size: 4.5em;
+    }
+    .not-found-content h2 {
+      font-size: 1.5em;
+    }
+     .not-found-content p {
+      font-size: 1em;
+    }
+    .home-link-button {
+       padding: 10px 20px;
+       font-size: 1em;
+     }
+  }
