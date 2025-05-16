@@ -1,0 +1,70 @@
+.publications-main-content {
+  background-color: var(--background);
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  min-height: calc(100vh - 120px);
+}
+
+.filtro_container_pubs {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.filtro_container_pubs .btn.filter-btn {
+  background-color: var(--blanco);
+  border: 1px var(--borde-claro) solid;
+  color: var(--texto-principal);
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.filtro_container_pubs .btn.filter-btn.active {
+  background-color: var(--primario);
+  color: var(--blanco);
+  border-color: var(--primario);
+}
+ .filtro_container_pubs .btn.filter-btn:hover:not(.active) {
+     background-color: #e9ecef;
+ }
+
+
+/* Estilos para PublicationCard */
+.publication-card {
+  border: 1px solid var(--borde-claro);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+ .publication-card:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+ }
+
+
+.publication-card-img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.publication-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--texto-principal);
+  margin-bottom: 0.5rem;
+}
+
+.tipo_material_pubs {
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+  margin-bottom: 0.25rem;
+}
+
+.precio_card_pubs {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--primario);
+}
