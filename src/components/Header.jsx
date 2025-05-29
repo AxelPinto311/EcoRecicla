@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import { useAuth } from '../context/AuthContext.jsx'; // <-- Importa useAuth
+import { useAuth } from '../hooks/useAuth.jsx';
 import '../styles/Header.css';
 
 function Header() {
-  const { isAuthenticated, user, logout } = useAuth(); // <-- Obtén estado y funciones del contexto
+  const { isAuthenticated, user, logoutContext } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const navigate = useNavigate();
 
   const handleSearchChange = (event) => {
@@ -18,124 +19,132 @@ function Header() {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
+    // Aquí podrías manejar la búsqueda
     console.log('Buscando:', searchTerm);
-    // navigate(`/search?q=${searchTerm}`);
   };
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
+  const toggleUserDropdown = () => {
+    setIsUserDropdownOpen(!isUserDropdownOpen);
+  };
+
+  // Alterna el menú en mobile
+  const handleNavCollapse = () => {
+    setIsNavCollapsed(!isNavCollapsed);
   };
 
   const handleLogout = async () => {
-    await logout(); // Llama a la función logout del contexto
-    setDropdownOpen(false);
-    navigate('/login'); // Redirige a login después de cerrar sesión
+    setIsUserDropdownOpen(false);
+    setIsNavCollapsed(true);
+    await logoutContext();
+    navigate('/login');
   };
 
-  const userNameToDisplay = user?.name || "Usuario"; // Muestra el nombre del usuario o "Usuario"
+  const userNameToDisplay = user?.username || user?.name || user?.email?.split('@')[0] || "Usuario";
 
   return (
-    <header>
+    <header id="app-header">
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <Link className="navbar-brand ecorecicla_log" to={isAuthenticated ? "/publications" : "/"}>
+          <Link className="navbar-brand ecorecicla_log" to={isAuthenticated ? "/publications" : "/"}
+            onClick={() => setIsNavCollapsed(true)}>
             EcoRecicla
           </Link>
 
           {isAuthenticated && (
             <div className="buscador_container">
-              {/* ... (código del buscador sin cambios) ... */}
-               <form onSubmit={handleSearchSubmit} className="input-group">
-                 <span className="input-group-text" id="basic-addon1">
-                   <i className="bi bi-search"></i>
-                 </span>
-                 <input
-                   type="text"
-                   className="form-control"
-                   placeholder="Busca materiales reciclables"
-                   aria-label="Buscar materiales reciclables"
-                   aria-describedby="basic-addon1"
-                   value={searchTerm}
-                   onChange={handleSearchChange}
-                 />
-               </form>
+              <form onSubmit={handleSearchSubmit} className="input-group">
+                <span className="input-group-text" id="basic-addon1">
+                  <i className="bi bi-search"></i>
+                </span>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Busca materiales reciclables"
+                  aria-label="Buscar materiales reciclables"
+                  aria-describedby="basic-addon1"
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                />
+              </form>
             </div>
           )}
 
           <button
             className="navbar-toggler"
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarScroll"
+            onClick={handleNavCollapse}
             aria-controls="navbarScroll"
-            aria-expanded="false"
+            aria-expanded={!isNavCollapsed}
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse ul_container" id="navbarScroll">
+          <div
+            className={`collapse navbar-collapse ul_container ${!isNavCollapsed ? 'show' : ''}`}
+            id="navbarScroll"
+          >
             {isAuthenticated ? (
+              // Navbar para usuarios autenticados
               <ul className="navbar-nav mb-2 mb-lg-0 ms-auto">
                 <li className="nav-item">
-                  <Link className="nav-link" to="/map"> {/* Asumiendo una ruta /map */}
-                    <button className="btn boton_ver_mapa">
-                      <FontAwesomeIcon icon={faMapMarkerAlt} /> Ver Mapa
-                    </button>
+                  <Link className="nav-link btn-like btn-publicaciones" to="/publications" onClick={() => setIsNavCollapsed(true)}>
+                    Publicaciones
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/new-publication"> {/* Asumiendo una ruta /new-publication */}
-                    <button className="btn boton_nueva_publicacion">
-                      + Nueva Publicación
-                    </button>
+                  <Link className="nav-link btn-like btn-mapa" to="/#mapa_verde_section" onClick={() => setIsNavCollapsed(true)}>
+                    <FontAwesomeIcon icon={faMapMarkerAlt} /> Mapa
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/#contacto"> {/* Ajustar si "contacto" está en otra página */}
-                    <button className="btn btn_contacto">Contacto</button>
+                  <Link className="nav-link btn-like btn-nueva-publicacion" to="/new-publication" onClick={() => setIsNavCollapsed(true)}>
+                    + Nueva Publicación
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link btn-like btn-contacto" to="/#contacto" onClick={() => setIsNavCollapsed(true)}>
+                    Contacto
                   </Link>
                 </li>
                 <li className="nav-item dropdown">
                   <button
                     className="btn dropdown-toggle btn_name_user"
                     type="button"
-                    onClick={toggleDropdown}
-                    aria-expanded={isDropdownOpen}
+                    onClick={toggleUserDropdown}
+                    aria-expanded={isUserDropdownOpen}
                   >
-                    {userNameToDisplay} {/* Muestra el nombre del usuario del contexto */}
+                    {userNameToDisplay}
                   </button>
-                  {isDropdownOpen && (
-                    <ul className="dropdown-menu show">
-                      <li>
-                        <button className="dropdown-item" onClick={handleLogout}>
-                          Cerrar sesión
-                        </button>
-                      </li>
-                    </ul>
-                  )}
+                  <ul className={`dropdown-menu ${isUserDropdownOpen ? 'show' : ''}`}>
+                    <li>
+                      <button className="dropdown-item" onClick={handleLogout}>
+                        Cerrar sesión
+                      </button>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             ) : (
+              // Navbar para usuarios no autenticados
               <ul className="navbar-nav mb-2 mb-lg-0 ms-auto">
-                {/* ... (opciones de menú para no autenticados sin cambios) ... */}
                 <li className="nav-item">
-                  <Link className="nav-link" to="/#mapa_verde_section">
+                  <Link className="nav-link" to="/#mapa_verde_section" onClick={() => setIsNavCollapsed(true)}>
                     Mapa
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/#nosotros">
+                  <Link className="nav-link" to="/#nosotros" onClick={() => setIsNavCollapsed(true)}>
                     Nosotros
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/#contacto">
+                  <Link className="nav-link" to="/#contacto" onClick={() => setIsNavCollapsed(true)}>
                     Contacto
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/login">
+                  <Link className="nav-link" to="/login" onClick={() => setIsNavCollapsed(true)}>
                     <button className="btn btn_iniciar_sesion">
                       Iniciar sesión
                     </button>

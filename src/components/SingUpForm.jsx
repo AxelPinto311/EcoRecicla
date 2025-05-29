@@ -4,62 +4,78 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../styles/RegisterLoginForm.css';
 import axios from 'axios';
 
-// Configure axios to send cookies with requests (if not already set globally elsewhere)
-// If LoginForm.jsx already set this, it's fine, defaults apply to all axios instances.
-// axios.defaults.withCredentials = true;
+const GoogleIconSignUp = () => (
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" style={{ marginRight: '10px', verticalAlign: 'middle', width: '20px', height: '20px' }}>
+    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+    <path fill="none" d="M0 0h48v48H0z"></path>
+  </svg>
+);
 
-function SignUpForm() {
+// Formulario de registro de usuario
+export function SignUpForm() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
+  // Envía el formulario de registro
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
+    setSuccessMessage('');
     setLoading(true);
 
-    console.log('Datos de registro a enviar:', { name: fullName, email, password });
-
     try {
-      const response = await axios.post(`${apiBaseUrl}/auth/register`, {
-        name: fullName, // Your RegisterDTO expects 'name'
-        email: email,    // 'email' matches
-        password: password // 'password' matches
+      await axios.post(`${apiBaseUrl}/auth/register`, {
+        name: fullName,
+        email: email,
+        password: password
       });
-
-      console.log('Respuesta del servidor (registro):', response);
+      
       setLoading(false);
-
-      // Similar to login, cookies should be set by the browser on successful registration.
-      alert('¡Registro exitoso! Serás redirigido para iniciar sesión.');
-      navigate('/login'); // Redirect to login page after successful registration
+      setSuccessMessage('¡Registro exitoso! Serás redirigido para iniciar sesión.');
+      
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
 
     } catch (err) {
       setLoading(false);
       console.error('Error en el registro:', err);
       if (err.response) {
-        // Error from backend
         setError(err.response.data?.message || err.response.data?.error || 'Ocurrió un error al registrarse.');
       } else if (err.request) {
-        // Request was made but no response received
         setError('No se pudo conectar al servidor. Inténtalo más tarde.');
       } else {
-        // Something else happened
         setError('Ocurrió un error inesperado.');
       }
     }
   };
 
+  // Redirige al registro con Google
+  const handleGoogleSignUp = () => {
+    window.location.href = `${apiBaseUrl}/oauth2/authorization/google`;
+  };
+
   return (
     <div className="signup-container">
       <form className="signup-form" onSubmit={handleSubmit}>
+        <div className="back-to-home-link">
+          <Link to="/">&larr; Volver al Inicio</Link>
+        </div>
+
         <h2>Crear una cuenta</h2>
         {error && <p className="error-message">{error}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
+
         <div className="form-group">
           <label htmlFor="fullName">Nombre completo</label>
           <input
@@ -69,6 +85,7 @@ function SignUpForm() {
             onChange={(e) => setFullName(e.target.value)}
             placeholder="Juan Pérez"
             required
+            disabled={loading}
           />
         </div>
         <div className="form-group">
@@ -80,6 +97,7 @@ function SignUpForm() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="usuario@ejemplo.com"
             required
+            disabled={loading}
           />
         </div>
         <div className="form-group">
@@ -91,12 +109,28 @@ function SignUpForm() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="********"
             required
-            minLength="6" // O la validación que tengas en el backend
+            minLength="6"
+            disabled={loading}
           />
         </div>
         <button type="submit" className="submit-button" disabled={loading}>
           {loading ? 'Registrando...' : 'Registrarse'}
         </button>
+
+        <div className="or-separator">
+          <span className="or-text">o</span>
+        </div>
+
+        <button
+          type="button"
+          className="google-login-button"
+          onClick={handleGoogleSignUp}
+          disabled={loading}
+        >
+          <GoogleIconSignUp />
+          Continuar con Google
+        </button>
+
         <p className="login-link">
           ¿Ya tienes una cuenta?{' '}
           <Link to="/login">Inicia sesión</Link>
@@ -106,4 +140,6 @@ function SignUpForm() {
   );
 }
 
-export default SignUpForm;
+// Si SignUpForm es el único o principal componente en este archivo, considera:
+// export default SignUpForm;
+// Si no, la exportación nombrada está bien.

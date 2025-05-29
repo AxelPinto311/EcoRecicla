@@ -2,20 +2,20 @@ body {
     background-color: #e7fdee;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
-  }
-  
-  /* Contenedor principal para centrar */
-  .signup-container {
+}
+
+/* Centra el contenedor principal */
+.signup-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
-  }
-  
-  /* El formulario en sí */
-  .signup-form {
+}
+
+/* Estilo del formulario */
+.signup-form {
     background-color: #ffffff;
     padding: 40px 50px;
     border-radius: 8px;
@@ -24,56 +24,75 @@ body {
     width: 100%;
     box-sizing: border-box;
     text-align: center;
-  }
-  
-  .signup-form h2 {
+}
+
+.signup-form h2 {
     color: #17803d;
     margin-bottom: 30px;
     font-size: 1.9em;
-  }
-  
-    /* Grupos de label + input */
-    .form-group {
-        margin-bottom: 22px;
-        text-align: left;
-    }
-  
-  .form-group label {
+}
+
+/* Grupo de campos del formulario */
+.form-group {
+    margin-bottom: 22px;
+    text-align: left;
+}
+
+.form-group label {
     display: block;
     margin-bottom: 8px;
     color: #555;
     font-weight: 600;
     font-size: 1em;
-  }
-  
-  .form-group input {
+}
+
+.form-group input {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1.05em;
-  }
-  
-  .form-group input:focus {
+}
+
+.form-group input:focus {
     outline: none;
     border-color: #28a745;
     box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
-  }
-  
-  .success-message {
-    color: #155724; /* Verde oscuro */
-    background-color: #d4edda; /* Verde claro */
+}
+
+/* Link para volver al inicio */
+.back-to-home-link {
+    text-align: left;
+    margin-bottom: 20px;
+    margin-top: -20px;
+}
+
+.back-to-home-link a {
+    color: var(--texto-secundario, #555);
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.back-to-home-link a:hover {
+    color: var(--primario, #16A34A);
+    text-decoration: underline;
+}
+
+/* Mensaje de éxito */
+.success-message {
+    color: #155724;
+    background-color: #d4edda;
     border: 1px solid #c3e6cb;
     padding: 10px;
     border-radius: 4px;
     margin-bottom: 15px;
     font-size: 0.9em;
     text-align: center;
-  }
-  
-  /* Botón de envío */
-  .submit-button {
+}
+
+/* Botón de envío del formulario */
+.submit-button {
     width: 100%;
     padding: 12px 15px;
     background-color: #28a745;
@@ -85,63 +104,124 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 20px;
-  }
-  
-  .submit-button:hover {
+}
+
+.submit-button:hover {
     background-color: #218838;
-  }
-  
-  .submit-button:disabled {
+}
+
+.submit-button:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
-  }
-  
-  
-  /* Link para iniciar sesión */
-  .login-link {
+}
+
+/* Link para ir a iniciar sesión */
+.login-link {
     margin-top: 20px;
     font-size: 0.9em;
     color: #555;
-  }
-  
-  .login-link a {
+}
+
+.login-link a {
     color: #28a745;
     text-decoration: none;
     font-weight: bold;
-  }
-  
-  .login-link a:hover {
+}
+
+.login-link a:hover {
     text-decoration: underline;
-  }
-  
-  /* Mensaje de error (sin cambios) */
-  .error-message {
-      color: #dc3545;
-      background-color: #f8d7da;
-      border: 1px solid #f5c6cb;
-      padding: 10px;
-      border-radius: 4px;
-      margin-bottom: 15px;
-      font-size: 0.9em;
-      text-align: center;
-  }
-  
-  /* --- Media Queries para Responsividad (Ajustados) --- */
-  @media (max-width: 540px) {
+}
+
+/* Mensaje de error */
+.error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 540px) {
     .signup-form {
-      padding: 30px 25px;
-      max-width: 95%;
+        padding: 30px 25px;
+        max-width: 95%;
     }
-  
+
     .signup-form h2 {
-      font-size: 1.7em;
+        font-size: 1.7em;
     }
-     .form-group input {
-      padding: 11px 13px;
-      font-size: 1em;
+    .form-group input {
+        padding: 11px 13px;
+        font-size: 1em;
     }
-     .submit-button {
-       padding: 11px 13px;
-       font-size: 1.1em;
-     }
-  }
+    .submit-button {
+        padding: 11px 13px;
+        font-size: 1.1em;
+    }
+}
+
+/* Separador visual "o" */
+.or-separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #888;
+}
+
+.or-separator::before,
+.or-separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+}
+
+.or-separator .or-text {
+    padding: 0 10px;
+    font-size: 0.9em;
+}
+
+/* Botón para login con Google */
+.google-login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    color: #444;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.google-login-button:hover {
+    background-color: #f8f8f8;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+.google-login-button:disabled {
+    background-color: #f0f0f0;
+    color: #aaa;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Si usas SVG en el botón de Google, puedes descomentar y ajustar esto */
+/*
+.google-login-button svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+*/

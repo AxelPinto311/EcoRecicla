@@ -1,75 +1,59 @@
 // src/context/AuthContext.jsx
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
+// Configura axios para enviar cookies en cada petición
+axios.defaults.withCredentials = true;
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null); // Para guardar información del usuario, como el nombre/email
-  const [loadingAuth, setLoadingAuth] = useState(true); // Para verificar el estado inicial
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-
-  // Función para verificar si ya hay una sesión activa (ej. al cargar la app)
-  // Esto es opcional pero bueno para persistencia. Requiere un endpoint en backend.
-  // Por ahora, lo dejaremos simple y el estado se reiniciará al recargar.
-  // En un futuro, podrías tener un endpoint /auth/me o /auth/status
+  // Verifica si hay sesión activa al montar el componente
   useEffect(() => {
-    // Simulación: si hubiera un token o cookie que verificar al inicio
-    // Ejemplo:
-    // const checkAuthStatus = async () => {
-    //   try {
-    //     // Suponiendo que tienes un endpoint que devuelve info del usuario si está logueado
-    //     const response = await axios.get(`${apiBaseUrl}/auth/verify`); // O /auth/me
-    //     if (response.data && response.data.user) {
-    //       setIsAuthenticated(true);
-    //       setUser(response.data.user); // Asumiendo que el backend devuelve { user: { name: '...', email: '...' } }
-    //     }
-    //   } catch (error) {
-    //     setIsAuthenticated(false);
-    //     setUser(null);
-    //   } finally {
-    //     setLoadingAuth(false);
-    //   }
-    // };
-    // checkAuthStatus();
-    setLoadingAuth(false); // Por ahora, solo indicamos que la carga inicial de auth terminó
-  }, [apiBaseUrl]);
+    const verifyAuth = async () => {
+      try {
+        const response = await axios.get(`${apiBaseUrl}/auth/me`);
+        if (response.data) {
+          setIsAuthenticated(true);
+          setUser(response.data);
+        }
+      } catch (error) {
+        console.log('AuthContext: No hay sesión activa o error al verificar:', error.response?.data || error.message);
+        setIsAuthenticated(false);
+        setUser(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    verifyAuth();
+  }, []);
 
-
-  const login = async (email, password) => {
-    // La llamada a axios.post se hará en LoginForm
-    // Aquí solo actualizamos el estado después de un login exitoso
+  // Actualiza el estado al iniciar sesión
+  const loginContext = (userDataFromLogin) => {
     setIsAuthenticated(true);
-    // El backend no devuelve el nombre de usuario directamente en la respuesta de login.
-    // Podrías hacer otra llamada para obtener datos del usuario o usar el email.
-    setUser({ name: email.split('@')[0], email: email }); // Usamos parte del email como nombre temporal
-    // O setUser({ name: "Usuario Autenticado", email: email });
+    setUser(userDataFromLogin);
   };
 
-  const logout = async () => {
-    // Aquí podrías llamar a un endpoint de logout en tu backend si es necesario
-    // ej: await axios.post(`${apiBaseUrl}/auth/logout`);
-    // Tu backend ya borra cookies en /auth/delete, pero un logout específico es mejor.
-    // Por ahora, solo limpiamos el estado del frontend
+  // Limpia el estado al cerrar sesión
+  const logoutContext = async () => {
     setIsAuthenticated(false);
     setUser(null);
-    // Las cookies HttpOnly se borran por el backend o expiran.
-    // Si tienes tokens en localStorage, límpialos aquí.
   };
 
-  if (loadingAuth) {
-    return <div>Cargando autenticación...</div>; // O un spinner
+  if (isLoading) {
+    return <div>Verificando sesión...</div>;
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, loginContext, logoutContext, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+// El hook useAuth se moverá a su propio archivo.

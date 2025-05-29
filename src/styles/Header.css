@@ -1,85 +1,215 @@
-header {
-  font-family: sans-serif !important;
+/* src/styles/Header.css */
+
+/* Estilos principales del header */
+header#app-header nav.navbar {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.navbar .container-fluid {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+header#app-header .navbar-brand.ecorecicla_log {
+  font-weight: 700 !important;
+  color: var(--primario) !important;
+  font-size: 1.5rem !important;
 }
 
-.navbar-brand.ecorecicla_log {
-  font-weight: 700;
-  color: var(--primario);
-  font-size: 1.5rem;
-}
-
-/* Estilos para el buscador (cuando está logueado) */
-.buscador_container {
+header#app-header .buscador_container {
   width: 40%;
   margin: 0 15px;
 }
 
+/* Responsive: Navbar colapsado en móvil */
 @media (max-width: 991.98px) {
-  .buscador_container {
+  header#app-header .buscador_container {
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
   }
-  .ul_container {
-     padding-top: 10px;
+  header#app-header .navbar-collapse.ul_container {
+    padding-top: 10px;
+    width: 100%;
+  }
+  header#app-header .navbar-collapse.ul_container ul.navbar-nav {
+    width: 100%;
+    text-align: center;
+  }
+  header#app-header .navbar-collapse.ul_container ul.navbar-nav .nav-item {
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+  header#app-header .navbar-collapse.ul_container ul.navbar-nav .nav-item .btn,
+  header#app-header .navbar-collapse.ul_container ul.navbar-nav .nav-item .nav-link.btn-like {
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+  /* Botones más pequeños en móvil, excepto el de usuario */
+  header#app-header .navbar-collapse.ul_container .nav-item .btn:not(.btn_name_user),
+  header#app-header .navbar-collapse.ul_container .nav-item .nav-link.btn-like:not(.btn_name_user) {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.85rem;
+    border-radius: 0.22rem;
+  }
+  /* Botón de usuario destacado en móvil */
+  header#app-header .navbar-collapse.ul_container .nav-item .btn.btn_name_user {
+    padding: 0.45rem 0.85rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
   }
 }
 
-.ul_container {
+/* Navbar en escritorio */
+header#app-header .navbar-expand-lg .navbar-collapse.ul_container {
   flex-grow: 0 !important;
 }
 
-.ul_container ul {
+header#app-header .navbar-expand-lg .ul_container ul.navbar-nav {
   align-items: center;
   width: auto;
   gap: 10px;
 }
 
-.ul_container .nav-item {
+header#app-header .ul_container .nav-item {
   font-weight: 500;
 }
 
-/* Botones específicos cuando está logueado */
-.ul_container .boton_ver_mapa,
-.ul_container .btn_contacto {
-  background-color: var(--background);
-  font-weight: 400;
-  border: 1px var(--borde-claro) solid;
-  color: var(--texto-principal);
+/* Botón tipo link general para el navbar */
+header#app-header .nav-link.btn-like {
+  display: inline-block;
   padding: 0.375rem 0.75rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: none;
+  border: 1px solid transparent;
+  transition: color .15s, background-color .15s, border-color .15s, box-shadow .15s;
 }
- .ul_container .boton_ver_mapa svg {
-     margin-right: 5px;
- }
 
-
-.ul_container .boton_ver_mapa:hover,
-.ul_container .btn_contacto:hover {
-  background-color: #e9ecef;
-}
-
-.ul_container .boton_nueva_publicacion,
-.ul_container .btn_name_user {
+/* Botones principales en verde */
+header#app-header .nav-link.btn-like.btn-publicaciones,
+header#app-header .nav-link.btn-like.btn-nueva-publicacion,
+header#app-header .nav-link.btn-like.btn_name_user {
   background-color: var(--primario);
-  font-weight: 400;
-  border: 1px var(--borde-claro) solid;
   color: var(--blanco);
-  padding: 0.375rem 0.75rem;
+  border-color: var(--primario);
 }
- .ul_container .boton_nueva_publicacion:hover,
- .ul_container .btn_name_user:hover {
-     background-color: #148a3f;
- }
+header#app-header .nav-link.btn-like.btn-publicaciones:hover,
+header#app-header .nav-link.btn-like.btn-nueva-publicacion:hover,
+header#app-header .nav-link.btn-like.btn_name_user:hover {
+  background-color: #148a3f;
+  border-color: #148a3f;
+  color: var(--blanco);
+}
 
-.dropdown .dropdown-menu {
+/* Botones secundarios en gris */
+header#app-header .nav-link.btn-like.btn-mapa,
+header#app-header .nav-link.btn-like.btn-contacto {
+  background-color: var(--background);
+  color: var(--texto-principal);
+  border: 1px solid var(--borde-claro);
+}
+header#app-header .nav-link.btn-like.btn-mapa:hover,
+header#app-header .nav-link.btn-like.btn-contacto:hover {
+  background-color: #e9ecef;
+  color: var(--texto-principal);
+  border-color: #c0c5cb;
+}
+
+/* Ajuste visual para el botón "Publicaciones" */
+header#app-header .nav-link.btn-like.btn-publicaciones {
+  border: 1px solid var(--primario);
+  background-color: var(--primario);
+  color: var(--blanco);
+  transition: color .15s, background-color .15s, border-color .15s, box-shadow .15s;
+}
+header#app-header .ul_container .nav-item .nav-link.btn-publicaciones:hover {
+  background-color: #148a3f;
+  border-color: #148a3f;
+  color: var(--blanco);
+}
+
+/* Botón "Publicaciones" en lista */
+header#app-header .ul_container .nav-item .nav-link.btn-publicaciones {
+  background-color: var(--primario);
+  color: var(--blanco);
+  border-color: var(--primario);
+}
+header#app-header .ul_container .nav-item .nav-link.btn-publicaciones:hover {
+  background-color: #148a3f;
+  border-color: #148a3f;
+  color: var(--blanco);
+}
+
+/* Botones secundarios específicos */
+header#app-header .ul_container .nav-item .btn.boton_ver_mapa,
+header#app-header .ul_container .nav-item .btn.btn_contacto {
+  background-color: var(--background);
+  color: var(--texto-principal);
+  border: 1px solid var(--borde-claro);
+  padding: 0.375rem 0.75rem;
+  font-weight: 400;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  text-decoration: none;
+  box-shadow: none;
+}
+header#app-header .ul_container .nav-item .btn.boton_ver_mapa:hover,
+header#app-header .ul_container .nav-item .btn.btn_contacto:hover {
+  background-color: #e9ecef;
+  color: var(--texto-principal);
+  border-color: #c0c5cb;
+}
+header#app-header .ul_container .nav-item .btn.boton_ver_mapa .svg-inline--fa {
+  margin-right: 5px;
+}
+
+/* Botón de nueva publicación y usuario */
+header#app-header .ul_container .nav-item .btn.boton_nueva_publicacion,
+header#app-header .ul_container .nav-item .btn.btn_name_user {
+  background-color: var(--primario);
+  color: var(--blanco);
+  border: 1px solid var(--primario);
+  padding: 0.375rem 0.75rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  text-decoration: none;
+  box-shadow: none;
+}
+header#app-header .ul_container .nav-item .btn.boton_nueva_publicacion:hover,
+header#app-header .ul_container .nav-item .btn.btn_name_user:hover {
+  background-color: #148a3f;
+  border-color: #148a3f;
+  color: var(--blanco);
+}
+
+/* Botón de iniciar sesión */
+header#app-header .ul_container .nav-item .btn.btn_iniciar_sesion {
+  background-color: var(--primario);
+  color: var(--blanco);
+  border: 1px solid var(--primario);
+  padding: 0.375rem 0.75rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  text-decoration: none;
+  box-shadow: none;
+}
+header#app-header .ul_container .nav-item .btn.btn_iniciar_sesion:hover {
+  background-color: #148a3f;
+  border-color: #148a3f;
+  color: var(--blanco);
+}
+
+/* Dropdown del usuario */
+header#app-header .navbar .dropdown .dropdown-menu {
   position: absolute;
   background-color: var(--blanco);
   border: 1px solid rgba(0,0,0,.15);
@@ -87,12 +217,10 @@ header {
   box-shadow: 0 .5rem 1rem rgba(0,0,0,.175);
   z-index: 1000;
 }
-
-.dropdown .dropdown-menu.show {
+header#app-header .navbar .dropdown .dropdown-menu.show {
   display: block;
 }
-
-.dropdown .dropdown-item {
+header#app-header .navbar .dropdown .dropdown-item {
   display: block;
   width: 100%;
   padding: .5rem 1rem;
@@ -104,35 +232,23 @@ header {
   background-color: transparent;
   border: 0;
   cursor: pointer;
+  text-decoration: none;
 }
-
-.dropdown .dropdown-item:hover {
+header#app-header .navbar .dropdown .dropdown-item:hover {
   color: #1e2125;
   background-color: #e9ecef;
 }
 
-
-/* Botón de iniciar sesión (cuando no está logueado) */
-.ul_container .btn_iniciar_sesion {
-  background-color: var(--primario);
-  color: var(--blanco);
-  font-weight: 500;
-  padding: 0.375rem 0.75rem;
+/* Links normales del navbar */
+header#app-header .navbar-nav .nav-link:not(.btn-like) {
+  color: var(--texto-principal);
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  text-decoration: none;
+  display: inline-block;
+  line-height: normal;
+  vertical-align: middle;
 }
- .ul_container .btn_iniciar_sesion:hover {
-     background-color: #148a3f;
- }
-
-.navbar-nav .nav-link {
-    color: var(--texto-principal);
+header#app-header .navbar-nav .nav-link:not(.btn-like):hover {
+  color: var(--primario);
 }
-.navbar-nav .nav-link:hover {
-    color: var(--primario);
-}
- .ul_container .nav-item .nav-link button.btn {
-     display: block;
- }
- .ul_container .nav-item > .nav-link {
-     padding-top: .5rem;
-     padding-bottom: .5rem;
- }
