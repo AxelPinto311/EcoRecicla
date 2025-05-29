@@ -32,6 +32,9 @@ header{
     background-color: var(--primario);
     font-weight: 400;
     border: 1px #dee2e0 solid;
+    
+}
+.ul_container ul li .boton_nueva_publicacion a{
     color: white;
 }
 .ul_container ul li .btn_name_user{

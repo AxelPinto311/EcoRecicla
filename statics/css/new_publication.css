@@ -1,0 +1,234 @@
+/* statics/css/new-publication.css */
+
+/* Estilos Generales de la Página de Publicación */
+.new-publication-main {
+    background-color: #f8f9fa; /* Un blanco roto o gris muy claro para el fondo del main */
+    padding-bottom: 50px; /* Espacio para que el footer no quede pegado */
+}
+
+.publication-title {
+    color: #212529; /* Color de texto oscuro, similar a tus títulos actuales */
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+/* Estilos de la Tarjeta del Formulario */
+.card {
+    border: none; /* Eliminar el borde predeterminado de Bootstrap */
+    border-radius: 0.75rem; /* Bordes ligeramente redondeados */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08); /* Sombra suave para dar profundidad */
+}
+
+/* Estilos de las etiquetas de los formularios */
+.form-label-custom {
+    font-weight: 500;
+    color: #495057; /* Un gris oscuro para las etiquetas */
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos para los campos de entrada y select */
+.form-control,
+.form-select {
+    border-radius: 0.5rem; /* Bordes redondeados */
+    border: 1px solid #ced4da; /* Borde gris claro */
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #28a745; /* Verde de EcoRecicla al enfocar */
+    box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25); /* Sombra de enfoque verde */
+}
+
+/* Sección de Carga de Imagen */
+.image-upload-area {
+    border: 2px dashed #ced4da; /* Borde punteado para el área de carga */
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    min-height: 180px; /* Altura mínima para el área de carga */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Necesario para posicionar el botón de remover */
+}
+
+.image-upload-area:hover {
+    background-color: #f0f0f0; /* Ligero cambio de color al pasar el mouse */
+}
+
+.upload-icon {
+    font-size: 3rem; /* Tamaño grande para el ícono de cámara */
+    color: #28a745; /* Verde de EcoRecicla */
+}
+
+.upload-text {
+    color: #6c757d; /* Gris para el texto descriptivo */
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+}
+
+.image-preview {
+    display: flex; /* Para centrar la imagen y el botón de remover */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente para la imagen */
+    border-radius: 0.5rem;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 160px; /* Limitar la altura de la previsualización */
+    object-fit: contain; /* Asegura que la imagen se ajuste sin distorsionarse */
+    border-radius: 0.5rem;
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    padding: 0.3rem;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.remove-image-btn:hover {
+    opacity: 1;
+}
+
+/* Botones de Acción */
+.publish-btn {
+    background-color: #28a745; /* Verde de EcoRecicla */
+    border-color: #28a745;
+    font-weight: 600;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.publish-btn:hover {
+    background-color: #218838; /* Verde un poco más oscuro al pasar el mouse */
+    border-color: #1e7e34;
+}
+
+.cancel-btn {
+    color: #6c757d; /* Gris para el texto */
+    border-color: #6c757d; /* Gris para el borde */
+    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+.material-categories-container .category-btn{
+    border: solid 1px #1e7e34;
+    margin-top: 1%;
+}
+.cancel-btn:hover {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* Estilos para mensajes de error */
+.form-text.text-danger {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+.remove-tag-btn{
+    
+    padding: 4px!important;
+}
+/* ... (código CSS anterior) ... */
+
+/* Sección de Carga de Imágenes */
+.image-upload-area {
+    /* ... (mantener estilos existentes) ... */
+    min-height: 200px; /* Quizás un poco más de altura mínima */
+    position: relative;
+    /* Los iconos y textos de subida solo se mostrarán si no hay imágenes */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-upload-area.has-images .upload-icon,
+.image-upload-area.has-images .upload-text {
+    display: none; /* Oculta el icono y texto si ya hay imágenes */
+}
+
+.image-previews-container {
+    width: 100%;
+    /* No establecer height fijo, que se adapte al contenido */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra las miniaturas */
+    gap: 10px; /* Espacio entre las miniaturas */
+}
+
+.image-thumbnail {
+    position: relative;
+    width: 100px; /* Tamaño de la miniatura */
+    height: 100px;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Fondo para si la imagen no carga */
+}
+
+.image-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen para llenar el contenedor */
+}
+
+.image-thumbnail .remove-image-thumbnail-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease-in-out;
+}
+
+.image-thumbnail .remove-image-thumbnail-btn:hover {
+    background-color: #dc3545; /* Rojo al pasar el mouse */
+    color: white;
+}
+
+/* ... (resto del código CSS) ... */
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+    .publication-title {
+        font-size: 1.8rem;
+    }
+    .card {
+        padding: 1.5rem !important;
+    }
+    .image-upload-area {
+        min-height: 150px;
+    }
+    .upload-icon {
+        font-size: 2.5rem;
+    }
+}
