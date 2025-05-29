@@ -1,7 +1,9 @@
 package EcoRecicla.service;
 
-import EcoRecicla.model.dto.LoginDTO;
-import EcoRecicla.model.dto.RegisterDTO;
+import EcoRecicla.exceptions.EmailAlreadyExistsException;
+import EcoRecicla.exceptions.UsernameAlreadyExistsException;
+import EcoRecicla.model.dto.LoginDto;
+import EcoRecicla.model.dto.RegisterDto;
 import EcoRecicla.model.entity.Role;
 import EcoRecicla.model.entity.User;
 import EcoRecicla.model.enums.Proveedor;
@@ -38,18 +40,18 @@ public class AuthService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    public Tokens login(LoginDTO loginDTO) {
-        Authentication authentication= authentication(loginDTO);
+    public Tokens login(LoginDto loginDTO) {
+        Authentication authentication= this.authentication(loginDTO);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         return new Tokens(jwtUtil.accessToken(authentication), jwtUtil.refreshToken(authentication) );
     }
 
-    public Tokens register(RegisterDTO registerDTO) {
+    public Tokens register(RegisterDto registerDTO) {
         if(userRepository.existsUserByUsername(registerDTO.name())){
-            new BadCredentialsException("Ya existe un usuario con ese nombre");
+            throw new UsernameAlreadyExistsException("Ya existe un usuario con este nombre");
         }else if (userRepository.existsUserByEmail(registerDTO.email())){
-            new BadCredentialsException("Ya existe un usuario con ese email");
+            throw new EmailAlreadyExistsException("Ya existe un usuario con este email");
         }
 
         Set<Role> role=roleRepository.findRoleByRoleEnum(RoleEnum.USER);
@@ -74,11 +76,11 @@ public class AuthService {
     }
 
 
-    private Authentication authentication(LoginDTO loginDTO) {
-        UserDetails userDetails= myUserDetailsService.loadUserByUsername(loginDTO.email());
+    private Authentication authentication(LoginDto loginDTO) {
+        UserDetails userDetails= myUserDetailsService.loadUserByUsername(loginDTO.email().trim());
 
-        if(userDetails==null || passwordEncoder.matches(loginDTO.password(), userDetails.getPassword())) {
-            throw new BadCredentialsException("Nombre de usuario o contraseña  incorrecta");
+        if(userDetails==null || !passwordEncoder.matches(loginDTO.password(), userDetails.getPassword())) {
+            throw new BadCredentialsException("Correo o contraseña  incorrecta");
         }
 
         return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());

@@ -1,9 +1,8 @@
 package EcoRecicla.controller;
 
 import EcoRecicla.cookie.CookieUtil;
-import EcoRecicla.model.dto.LoginDTO;
-import EcoRecicla.model.dto.RegisterDTO;
-import EcoRecicla.model.entity.User;
+import EcoRecicla.model.dto.LoginDto;
+import EcoRecicla.model.dto.RegisterDto;
 import EcoRecicla.repository.UserRepository;
 import EcoRecicla.security.jwt.Tokens;
 import EcoRecicla.service.AuthService;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Duration;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
@@ -28,12 +27,12 @@ public class AuthController {
     UserRepository userRepository;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginDto loginDTO) {
         return this.respondWithTokens(authService.login(loginDTO));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid@RequestBody RegisterDTO registerDTO) {
+    public ResponseEntity<?> register(@Valid@RequestBody RegisterDto registerDTO) {
         return this.respondWithTokens(authService.register(registerDTO));
     }
 

@@ -46,8 +46,9 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth-> auth
                         .requestMatchers("/auth/**").permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                 .oauth2Login(oauth-> oauth
+                       // .loginPage("/login.html")
                         .userInfoEndpoint(info -> info
                                 .oidcUserService(customOauth2Service))
                         .successHandler(successHandler))

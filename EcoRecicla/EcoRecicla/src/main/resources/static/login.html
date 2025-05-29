@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <style>
+        /* --- CSS INCORPORADO --- */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .separator {
+            margin: 20px 0;
+            color: #888;
+            position: relative;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background-color: #ddd;
+        }
+
+        .separator::before {
+            left: 0;
+        }
+
+        .separator::after {
+            right: 0;
+        }
+
+        .oauth-buttons {
+            margin-top: 20px;
+        }
+
+        .oauth-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+
+        .oauth-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .oauth-button.google {
+            background-color: #db4437; /* Color de Google */
+            color: white;
+            border: none;
+        }
+
+        .oauth-button.google:hover {
+            background-color: #c23321;
+        }
+
+        .google-logo {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        p a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            background-color: #ffe0e0;
+            border: 1px solid red;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .success-message {
+            color: green;
+            background-color: #e0ffe0;
+            border: 1px solid green;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        /* --- FIN CSS INCORPORADO --- */
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <h2>Iniciar Sesión</h2>
+
+    <div id="error-message" class="error-message" style="display:none;"></div>
+    <div id="logout-message" class="success-message" style="display:none;"></div>
+
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+
+    <p class="separator">O</p>
+
+    <a href="/oauth2/authorization/google" class="oauth-button google">
+        <img src="/images/google-logo.png" alt="Google Logo" class="google-logo">
+        Iniciar Sesión con Google
+    </a>
+
+    <p>¿No tienes cuenta? <a href="/register">Regístrate aquí</a></p>
+</div>
+
+<script>
+    /* --- JAVASCRIPT INCORPORADO --- */
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginForm = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const errorMessageDiv = document.getElementById('error-message');
+        const logoutMessageDiv = document.getElementById('logout-message');
+
+        // Función para mostrar mensajes
+        function showMessage(element, message, type) {
+            element.textContent = message;
+            element.style.display = 'block';
+            if (type === 'error') {
+                element.className = 'error-message';
+            } else if (type === 'success') {
+                element.className = 'success-message';
+            }
+        }
+
+        // Función para ocultar todos los mensajes
+        function hideMessages() {
+            errorMessageDiv.style.display = 'none';
+            logoutMessageDiv.style.display = 'none';
+        }
+
+        // Comprobar parámetros de la URL para mensajes de error/logout de Spring Security
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('error')) {
+            showMessage(errorMessageDiv, 'Usuario o contraseña inválidos.', 'error');
+        } else if (urlParams.has('oauth_error')) {
+            showMessage(errorMessageDiv, 'Error al iniciar sesión con el proveedor externo.', 'error');
+        } else if (urlParams.has('logout')) {
+            showMessage(logoutMessageDiv, 'Has cerrado sesión correctamente.', 'success');
+        }
+
+        // Manejar el envío del formulario
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita el envío predeterminado del formulario
+
+            hideMessages(); // Oculta mensajes anteriores
+
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+
+            // La URL de loginProcessingUrl de Spring Security
+            const loginUrl = '/auth/login';
+
+            // Usar Fetch API para enviar los datos
+            fetch(loginUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded' // Formato esperado por Spring Security
+                },
+                // Codificar los datos del formulario como cadena URL-encoded
+                body: `username=${username},
+                       password=${password}`
+            })
+                .then(response => {
+                    if (response.ok) { // Código de estado 200-299
+                        // Autenticación exitosa
+                        window.location.href = '/dashboard'; // Redirige al usuario
+                    } else {
+                        // Autenticación fallida
+                        if (response.status === 401 || response.status === 403) {
+                            showMessage(errorMessageDiv, 'Usuario o contraseña incorrectos.', 'error');
+                        } else {
+                            showMessage(errorMessageDiv, 'Ha ocurrido un error inesperado al iniciar sesión.', 'error');
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error de red o en la solicitud:', error);
+                    showMessage(errorMessageDiv, 'No se pudo conectar con el servidor. Inténtelo de nuevo.', 'error');
+                });
+        });
+    });
+    /* --- FIN JAVASCRIPT INCORPORADO --- */
+</script>
+</body>
+</html>
