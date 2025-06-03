@@ -1,0 +1,46 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa; /* Fondo ligero de Bootstrap */
+    color: #343a40; /* Color de texto oscuro de Bootstrap */
+}
+
+/* Definir variable CSS para tu color primario */
+:root {
+    --bs-success: #16A34A; /* Usamos --bs-success para sobrescribir el color primary de Bootstrap */
+    --bs-success-rgb: 22, 163, 74; /* RGB para el color principal */
+}
+
+/* Asegurar que el mapa tenga altura */
+#map {
+    height: 400px; /* Altura fija para el mapa */
+    width: 100%;
+    /* border y border-radius ya están en el HTML con clases de Bootstrap */
+}
+
+/* Ajustes menores si es necesario, pero Bootstrap se encarga de mucho */
+.container {
+    max-width: 1200px;
+}
+
+/* Estilos para leyendas de fieldset con el color primario */
+legend.text-primary {
+    color: var(--bs-success) !important; /* Usar !important para sobrescribir si es necesario */
+    font-weight: 600;
+}
+
+/* Estilos para títulos de sección */
+h3.text-secondary {
+    color: #495057 !important; /* Un gris oscuro para subtítulos */
+}
+
+/* Asegurar que las labels de los checkboxes estén correctamente alineadas */
+.form-check {
+    margin-bottom: 0.5rem; /* Pequeño espacio entre cada checkbox */
+}
+
+/* Botón de buscar dirección */
+#geocodeAddressBtn {
+    /* El color por defecto de info en Bootstrap es azul claro, lo dejamos así por contraste o lo puedes cambiar */
+    /* background-color: var(--bs-success); */
+    /* border-color: var(--bs-success); */
+}
