@@ -1,0 +1,22 @@
+:root {
+    --primario: #16A34A; /* Azul */
+    --background: #F0FDF4;
+  }
+  
+.nav-tabs .nav-item{
+    background-color: var(--primario);
+   
+}
+.nav-tabs .nav-item #publicaciones-tab{
+    color: white;
+}
+.nav-tabs .nav-item #publicaciones-tab.active{
+    color: var(--primario);
+}
+
+.nav-tabs .nav-item #sucursal-tab{
+    color: white;
+}
+.nav-tabs .nav-item #sucursal-tab.active{
+    color: var(--primario);
+}

@@ -1,4 +1,14 @@
-/* statics/css/new-publication.css */
+
+:root {
+    --primario: #16A34A;
+    --background: #F0FDF4;
+  }
+  
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background); /* Fondo ligero de Bootstrap */
+    color: #343a40; /* Color de texto oscuro de Bootstrap */
+}
 
 /* Estilos Generales de la Página de Publicación */
 .new-publication-main {
@@ -6,10 +16,9 @@
     padding-bottom: 50px; /* Espacio para que el footer no quede pegado */
 }
 
-.publication-title {
-    color: #212529; /* Color de texto oscuro, similar a tus títulos actuales */
-    font-weight: 600;
-    margin-bottom: 30px;
+
+.publication-title{
+color: white!important;
 }
 
 /* Estilos de la Tarjeta del Formulario */
@@ -60,7 +69,7 @@
 
 .upload-icon {
     font-size: 3rem; /* Tamaño grande para el ícono de cámara */
-    color: #28a745; /* Verde de EcoRecicla */
+    color: var(--primario); /* Verde de EcoRecicla */
 }
 
 .upload-text {

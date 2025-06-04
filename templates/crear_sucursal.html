@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Sucursal de Reciclaje</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="../statics/css/crear_sucursal.css">
     <link rel="stylesheet" href="../statics/css/header-log.css">
     <link rel="stylesheet" href="../statics/css/footer.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -20,11 +23,6 @@
             <div class="container-fluid">
                 <a class="navbar-brand ecorecicla_log">EcoRecicla</a>
                 <div class="buscador_container">
-                    <div class="input-group ">
-                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Busca materiales reciclables"
-                            aria-label="Buscar materiales reciclables" aria-describedby="basic-addon1">
-                    </div>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                     aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,8 +59,8 @@
         </nav>
     </header>
     <main>
-        <div class="container my-4">
-            <h1 class="text-center mb-4 text-success">Registrar Sucursal de Reciclaje</h1>
+        <div class="container py-5">
+            <h2 class="text-center mb-4">Registrar Sucursal de Reciclaje</h2>
 
             <div class="row g-4">
                 <div class="col-lg-6">
@@ -166,6 +164,16 @@
                                             <input class="form-check-input" type="checkbox" id="materialOrganic"
                                                 name="materials" value="Orgánico">
                                             <label class="form-check-label" for="materialOrganic">Orgánico</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="materialElectronico"
+                                                name="materials" value="Orgánico">
+                                            <label class="form-check-label" for="materialElectronico">Electrónico</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="materialTextil"
+                                                name="materials" value="Orgánico">
+                                            <label class="form-check-label" for="materialTextil">Textil</label>
                                         </div>
                                     </div>
                                     <div class="mb-3">
