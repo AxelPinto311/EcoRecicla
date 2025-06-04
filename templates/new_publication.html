@@ -20,8 +20,6 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand ecorecicla_log" href="../templates/publications.html">EcoRecicla</a>
-                <div class="buscador_container d-none d-lg-block">
-                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                     aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -29,24 +27,26 @@
                 <div class="collapse navbar-collapse ul_container" id="navbarScroll">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <button class="btn boton_ver_mapa"><a class="nav-link" href="#contacto"><i
-                                        class="bi bi-geo-alt"></i> Ver Mapa</a> </button>
+                            <button class="btn boton_ver_mapa"><a class="nav-link" href="/templates/mapa_verde.html"><i class="bi bi-geo-alt"></i> Ver
+                                    Mapa</a> </button>
                         </li>
                         <li class="nav-item">
-                            <button class="btn boton_nueva_publicacion active" aria-current="page"><a class="link-offset-2 link-underline link-underline-opacity-0" href="../templates/new_publication.html">+Nueva
-                                Publicación</a></button>
+                            <button class="btn boton_mi_sucursal"><a class="nav-link" href="../templates/my_posts.html">Mi Sucursal</a></button>
                         </li>
                         <li class="nav-item ">
                             <button class="btn btn_contacto"><a class="nav-link" href="#contacto">Contacto</a> </button>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <button class="btn dropdown-toggle btn_name_user" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn dropdown-toggle btn_name_user" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     Axel Pinto
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="../index.html">Cerrar sesion</a></li>
+                                    
+                                    <li><a class="dropdown-item" href="../templates/my_posts.html">Mis Publicaciones</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Cerrar sesion</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -56,93 +56,70 @@
         </nav>
     </header>
 
-    <main class="new-publication-main">
-        <div class="container py-5">
-            <h2 class="text-center mb-4 publication-title">Crear Nueva Publicación</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6">
-                    <div class="card p-4 shadow-sm">
-                        <form id="newPublicationForm">
-                            <div class="mb-4">
-                                <label for="imageUpload" class="form-label upload-label">Subir Fotos del Material</label>
-                                <div class="image-upload-area text-center border rounded p-4 position-relative" id="imageUploadArea">
-                                    <input type="file" id="imageUpload" accept="image/*" class="d-none" multiple> <i class="bi bi-camera-fill upload-icon d-block mb-2"></i>
-                                    <p class="text-muted upload-text">Arrastra tus imágenes aquí o haz click para buscar</p>
-                                    <div id="imagePreviewsContainer" class="image-previews-container mt-3 d-flex flex-wrap justify-content-center gap-2">
-                                        </div>
-                                </div>
-                                <small class="form-text text-danger d-none" id="imageError">Por favor, sube al menos una imagen del material.</small>
-                            </div>
-
-
-
-                            <div class="mb-3">
-                                <label for="materialType" class="form-label form-label-custom">Tipo de Material</label>
-                                <div class="material-categories-container mb-2">
-                                    <button type="button" class="btn category-btn" data-material="papel">Papel</button>
-                                    <button type="button" class="btn category-btn"
-                                        data-material="carton">Cartón</button>
-                                    <button type="button" class="btn category-btn"
-                                        data-material="plastico">Plástico</button>
-                                    <button type="button" class="btn category-btn"
-                                        data-material="vidrio">Vidrio</button>
-                                    <button type="button" class="btn category-btn" data-material="metal">Metal</button>
-                                    <button type="button" class="btn category-btn"
-                                        data-material="electronicos">Electrónicos</button>
-                                    <button type="button" class="btn category-btn"
-                                        data-material="organicos">Orgánicos</button>
-                                    <button type="button" class="btn category-btn"
-                                        data-material="textiles">Textiles</button>
-                                </div>
-                                <div id="selectedMaterialsContainer"
-                                    class="selected-materials-container p-2 border rounded">
-                                    <p class="text-muted mb-0 no-selection-text">Ningún material seleccionado</p>
-                                </div>
-                                <input type="hidden" id="selectedMaterialsInput" name="selectedMaterials"> <small
-                                    class="form-text text-danger d-none" id="materialTypeError">Por favor, selecciona al
-                                    menos un tipo de material.</small>
-                            </div>
-                            <small class="form-text text-danger d-none" id="materialTypeError">Por favor, selecciona el
-                                tipo de material.</small>
-
-
-                            <div class="mb-3">
-                                <label for="price" class="form-label form-label-custom">Precio</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">$</span>
-                                    <input type="number" class="form-control" id="price" placeholder="Ej: 500" min="0"
-                                        step="0.01" required>
-                                </div>
-                                <div class="form-check mt-2">
-                                    <input class="form-check-input" type="checkbox" id="negotiablePrice">
-                                    <label class="form-check-label text-muted" for="negotiablePrice">
-                                        Precio negociable
-                                    </label>
-                                </div>
-                                <small class="form-text text-danger d-none" id="priceError">Por favor, ingresa un precio
-                                    válido.</small>
-                            </div>
-
-                            <div class="mb-4">
-                                <label for="description" class="form-label form-label-custom">Descripción del
-                                    Material</label>
-                                <textarea class="form-control" id="description" rows="4"
-                                    placeholder="Describe el estado, cantidad, y cualquier detalle relevante del material..."
-                                    required></textarea>
-                                <small class="form-text text-danger d-none" id="descriptionError">Por favor, ingresa una
-                                    descripción del material.</small>
-                            </div>
-
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-success btn-lg publish-btn">Publicar
-                                    Material</button>
-                                <button type="button" class="btn btn-outline-secondary btn-lg cancel-btn"
-                                    onclick="window.history.back();">Cancelar</button>
-                            </div>
-                        </form>
-                    </div>
+    <main class="container my-5">
+        <h2 class="text-center mb-4">Crear Nueva Publicación de Material Reciclable</h2>
+        <div class="card shadow p-4">
+            <form id="newPublicationForm" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Título de la Publicación <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Ej: Lote de botellas PET limpias" required>
+                    <div class="invalid-feedback">Por favor, ingresa un título para tu publicación.</div>
                 </div>
-            </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripción del Material <span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="description" name="description" rows="4" placeholder="Describe el tipo de material, cantidad, estado, etc." required></textarea>
+                    <div class="invalid-feedback">Por favor, ingresa una descripción para tu publicación.</div>
+                    <div id="descriptionError" class="text-danger mt-1" style="display:none;">La descripción no puede estar vacía.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="imageUpload" class="form-label">Imágenes del Material <span class="text-danger">*</span></label>
+                    <div id="imageUploadArea" class="image-upload-area border rounded p-4 text-center">
+                        <input type="file" id="imageUpload" name="images" accept="image/*" multiple style="display: none;">
+                        <i class="bi bi-cloud-arrow-up upload-icon display-4 text-muted"></i>
+                        <p class="upload-text text-muted mt-2">Arrastra y suelta imágenes aquí o haz clic para seleccionar</p>
+                        <div id="imageError" class="text-danger mt-1" style="display:none;">Por favor, sube al menos una imagen.</div>
+                    </div>
+                    <div id="imagePreviewsContainer" class="mt-3 d-flex flex-wrap gap-2">
+                        </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label d-block">Selecciona el Tipo de Material <span class="text-danger">*</span></label>
+                    <div class="filtro_container d-flex flex-wrap gap-2" id="materialCategorySelection">
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Papel">Papel</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Cartón">Cartón</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Plástico">Plástico</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Vidrio">Vidrio</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Metal">Metal</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Electrónicos">Electrónicos</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Orgánicos">Orgánicos</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Textiles">Textiles</button>
+                    </div>
+                    <input type="hidden" id="selectedMaterialsInput" name="materialType" required>
+                    <div id="materialTypeError" class="text-danger mt-1" style="display:none;">Por favor, selecciona al menos un tipo de material.</div>
+                    <div id="selectedMaterialsContainer" class="mt-2">
+                        <span class="no-selection-text text-muted">Ningún material seleccionado.</span>
+                        </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="price" class="form-label">Precio (opcional)</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="price" name="price" placeholder="Ej: 500" min="0">
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" id="negotiablePrice" name="negotiable">
+                        <label class="form-check-label" for="negotiablePrice">
+                            Precio negociable
+                        </label>
+                    </div>
+                    <div id="priceError" class="text-danger mt-1" style="display:none;">El precio no puede ser negativo.</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg w-100">Publicar Material</button>
+            </form>
         </div>
     </main>
 
@@ -155,8 +132,7 @@
                             <div class="contactanos_text_container">
                                 <i class="fa-solid fa-envelope"></i>
                                 <h3>Contáctanos</h3>
-                                <p>¿Tienes preguntas o sugerencias? Estamos aquí para ayudarte. No dudes en ponerte en
-                                    <br>contacto con
+                                <p>¿Tienes preguntas o sugerencias? Estamos aquí para ayudarte. No dudes en ponerte en <br>contacto con
                                     nuestro equipo.</p>
                             </div>
                         </div>
@@ -194,7 +170,6 @@
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/e032a44af0.js" crossorigin="anonymous"></script>
     <script src="../statics/js/new_publication.js"></script>
-
 </body>
 
 </html>

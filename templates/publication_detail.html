@@ -4,23 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../statics/css/publications.css">
-    <link rel="stylesheet" href="../statics/css/header-log.css">
+    <link rel="stylesheet" href="../statics/css/publication-detail.css"> <link rel="stylesheet" href="../statics/css/header-log.css">
     <link rel="stylesheet" href="../statics/css/footer.css">
-
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
-    <title>Publicaciones</title>
+    <title>Detalle de Publicación - EcoRecicla</title>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand ecorecicla_log">EcoRecicla</a>
-                <div class="buscador_container">
+                <a class="navbar-brand ecorecicla_log" href="../templates/publications.html">EcoRecicla</a> <div class="buscador_container">
                     <form id="mainSearchForm" class="d-flex">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
@@ -70,35 +68,54 @@
             </div>
         </nav>
     </header>
-    <main>
-        <section>
-            <div class="container">
 
+    <main>
+        <section id="publicationDetailSection" class="py-5">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="filtro_container">
-                            <input type="button" class="btn" value="papel" data-material="papel">
-                            <input type="button" value="Cartón" class="btn" data-material="carton">
-                            <input type="button" value="Plástico" class="btn" data-material="plastico">
-                            <input type="button" value="Vidrio" class="btn" data-material="vidrio">
-                            <input type="button" value="Metal" class="btn" data-material="metal">
-                            <input type="button" value="Electrónicos" class="btn" data-material="electronicos">
-                            <input type="button" value="Orgánicos" class="btn" data-material="organicos">
-                            <input type="button" value="Textiles" class="btn" data-material="textiles">
-                            <input type="button" value="Todas" class="btn btn-primary" data-material="todas">
+                    <div class="col-md-7 mb-4 mb-md-0">
+                        <div id="publicationCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner" id="carouselInner">
+                                </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#publicationCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#publicationCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
                     </div>
-                </div>
-                <div class="row" id="publicationsContainer">
-                    </div>
-                <div class="row mt-4" id="noPublicationsMessage" style="display: none;">
-                    <div class="col-12 text-center">
-                        <p class="lead text-muted">No se encontraron publicaciones que coincidan con tu búsqueda.</p>
+
+                    <div class="col-md-5">
+                        <h1 id="publicationTitle" class="mb-3"></h1>
+                        <p class="lead" id="publicationPrice"></p>
+                        <hr>
+                        <p><strong>Tipo de Material:</strong> <span id="publicationMaterialType"></span></p>
+                        <p><strong>Descripción:</strong> <span id="publicationDescription"></span></p>
+                        <p><strong>Estado:</strong> <span id="publicationStatus"></span></p>
+                        <hr>
+                        <p><strong>Vendedor:</strong> <span id="publicationSellerName"></span></p>
+                        <p><strong>Ubicación:</strong> <span id="publicationLocation"></span></p>
+                        <p><strong>Fecha de publicación:</strong> <span id="publicationDate"></span></p>
+
+                        <button id="buyButton" class="btn btn-success btn-lg mt-4 w-100"><i class="bi bi-whatsapp"></i> Contactar al Vendedor</button>
+                        <p id="buyButtonMessage" class="text-muted mt-2 text-center" style="display: none;">Pulsa para abrir WhatsApp.</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <section id="notFoundMessage" class="py-5 text-center" style="display: none;">
+            <div class="container">
+                <h2 class="display-4">Publicación no encontrada</h2>
+                <p class="lead">Lo sentimos, la publicación que buscas no existe o ha sido eliminada.</p>
+                <a href="../templates/publications.html" class="btn btn-primary mt-3">Volver a las Publicaciones</a>
+            </div>
+        </section>
     </main>
+
     <footer>
         <section class="contactanos_section" id="contacto">
             <div class="contactanos_container">
@@ -140,11 +157,12 @@
             </div>
         </section>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/e032a44af0.js" crossorigin="anonymous"></script>
-    <script src="../statics/js/publications.js"></script>
+    <script src="../statics/js/publication_detail.js"></script>
 </body>
 
 </html>

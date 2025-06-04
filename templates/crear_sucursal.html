@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Sucursal de Reciclaje</title>
+    <title>Registrar Sucursal de Reciclaje - EcoRecicla</title>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="../statics/css/crear_sucursal.css">
@@ -21,9 +21,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand ecorecicla_log">EcoRecicla</a>
-                <div class="buscador_container">
-                </div>
+                <a class="navbar-brand ecorecicla_log" href="../templates/publications.html">EcoRecicla</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                     aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,24 +29,30 @@
                 <div class="collapse navbar-collapse ul_container" id="navbarScroll">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <button class="btn boton_ver_mapa"><a class="nav-link" href="#contacto"><i
-                                        class="bi bi-geo-alt"></i> Ver Mapa</a> </button>
+                            <button class="btn boton_ver_mapa"><a class="nav-link" href="#contacto"><i class="bi bi-geo-alt"></i> Ver
+                                    Mapa</a> </button>
                         </li>
                         <li class="nav-item">
                             <button class="btn boton_nueva_publicacion"><a
                                     class="link-offset-2 link-underline link-underline-opacity-0"
                                     href="../templates/new_publication.html">+Nueva Publicación</a></button>
                         </li>
+                        <li class="nav-item">
+                            <button class="btn boton_mi_sucursal"><a class="nav-link" href="../templates/my_posts.html">Mi Sucursal</a></button>
+                        </li>
                         <li class="nav-item ">
                             <button class="btn btn_contacto"><a class="nav-link" href="#contacto">Contacto</a> </button>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <button class="btn dropdown-toggle btn_name_user" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn dropdown-toggle btn_name_user" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     Axel Pinto
                                 </button>
                                 <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+                                    <li><a class="dropdown-item" href="../templates/mis_publicaciones.html">Mis Publicaciones</a>
+                                    </li>
                                     <li><a class="dropdown-item" href="#">Cerrar sesion</a></li>
                                 </ul>
                             </div>
@@ -58,207 +62,118 @@
             </div>
         </nav>
     </header>
-    <main>
-        <div class="container py-5">
-            <h2 class="text-center mb-4">Registrar Sucursal de Reciclaje</h2>
 
-            <div class="row g-4">
-                <div class="col-lg-6">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <form id="branchForm">
-                                <fieldset class="mb-4">
-                                    <legend class="h5 text-primary">Datos de la Sucursal</legend>
-
-                                    <div class="mb-3">
-                                        <label for="branchName" class="form-label">Nombre de la Sucursal:</label>
-                                        <input type="text" class="form-control" id="branchName" name="branchName"
-                                            required>
-                                    </div>
-
-                                    <h3 class="mt-4 mb-3 text-secondary">Ubicación</h3>
-                                    <div class="row g-2">
-                                        <div class="col-md-9 mb-3">
-                                            <label for="addressStreet" class="form-label">Calle:</label>
-                                            <input type="text" class="form-control" id="addressStreet"
-                                                name="addressStreet" required>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label for="addressNumber" class="form-label">Número:</label>
-                                            <input type="text" class="form-control" id="addressNumber"
-                                                name="addressNumber" required>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="addressFloor" class="form-label">Piso/Depto (opcional):</label>
-                                        <input type="text" class="form-control" id="addressFloor" name="addressFloor">
-                                    </div>
-                                    <div class="row g-2">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="addressCity" class="form-label">Ciudad:</label>
-                                            <input type="text" class="form-control" id="addressCity" name="addressCity"
-                                                required>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="addressProvince" class="form-label">Provincia/Estado:</label>
-                                            <input type="text" class="form-control" id="addressProvince"
-                                                name="addressProvince" value="Mendoza" required>
-                                        </div>
-                                    </div>
-                                    <div class="row g-2">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="addressPostalCode" class="form-label">Código Postal:</label>
-                                            <input type="text" class="form-control" id="addressPostalCode"
-                                                name="addressPostalCode">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="addressCountry" class="form-label">País:</label>
-                                            <input type="text" class="form-control" id="addressCountry"
-                                                name="addressCountry" value="Argentina" required>
-                                        </div>
-                                    </div>
-                                    <!--<button type="button" id="geocodeAddressBtn" class="btn">Buscar Dirección en Mapa</button> -->
-
-                                    <input type="hidden" id="latitude" name="latitude">
-                                    <input type="hidden" id="longitude" name="longitude">
-                                </fieldset>
-
-                                <fieldset class="mb-4">
-                                    <legend class="h5 text-primary">Detalles de Contacto y Reciclaje</legend>
-                                    <div class="mb-3">
-                                        <label for="contactPhone" class="form-label">Teléfono de Contacto:</label>
-                                        <input type="tel" class="form-control" id="contactPhone" name="contactPhone">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="contactEmail" class="form-label">Email de Contacto:</label>
-                                        <input type="email" class="form-control" id="contactEmail" name="contactEmail">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Materiales Aceptados:</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="materialPlastic"
-                                                name="materials" value="Plástico">
-                                            <label class="form-check-label" for="materialPlastic">Plástico</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="materialPaper"
-                                                name="materials" value="Papel">
-                                            <label class="form-check-label" for="materialPaper">Papel</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="materialCardboard"
-                                                name="materials" value="Cartón">
-                                            <label class="form-check-label" for="materialCardboard">Cartón</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="materialGlass"
-                                                name="materials" value="Vidrio">
-                                            <label class="form-check-label" for="materialGlass">Vidrio</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="materialMetal"
-                                                name="materials" value="Metal">
-                                            <label class="form-check-label" for="materialMetal">Metal</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="materialOrganic"
-                                                name="materials" value="Orgánico">
-                                            <label class="form-check-label" for="materialOrganic">Orgánico</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="materialElectronico"
-                                                name="materials" value="Orgánico">
-                                            <label class="form-check-label" for="materialElectronico">Electrónico</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="materialTextil"
-                                                name="materials" value="Orgánico">
-                                            <label class="form-check-label" for="materialTextil">Textil</label>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="additionalComments" class="form-label">Comentarios
-                                            Adicionales:</label>
-                                        <textarea class="form-control" id="additionalComments" name="additionalComments"
-                                            rows="3"></textarea>
-                                    </div>
-                                </fieldset>
-
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <button type="submit" class="btn btn-success">Registrar Sucursal</button>
-                                    <button type="button" id="clearFormBtn" class="btn btn-outline-secondary">Limpiar
-                                        Formulario</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+    <main class="container my-5">
+        <h2 class="text-center mb-4" id="formTitle">Registrar Nueva Sucursal de Reciclaje</h2>
+        <div class="card shadow p-4">
+            <form id="branchForm">
+                <div class="mb-3">
+                    <label for="branchName" class="form-label">Nombre de la Sucursal <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="branchNameInput" name="nombre" placeholder="Ej: EcoCentro Recicla Mendoza" required>
+                    <div class="invalid-feedback">Por favor, ingresa el nombre de tu sucursal.</div>
                 </div>
 
-                <div class="col-lg-6">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body d-flex flex-column">
-                            <p class="card-text text-muted">Haz clic en el mapa o arrastra el marcador para seleccionar
-                                la ubicación.</p>
-                            <div id="map" class="flex-grow-1 border rounded mb-3"></div>
-                            <div id="locationInfo" class="alert alert-info" role="alert">
-                                Selecciona una ubicación en el mapa.
+                <div class="mb-3">
+                    <label for="branchAddress" class="form-label">Dirección <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="branchAddress" name="direccion" placeholder="Ej: Av. San Martín 1234" required>
+                    <div class="invalid-feedback">Por favor, ingresa la dirección de tu sucursal.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="branchPhone" class="form-label">Teléfono de Contacto <span class="text-danger">*</span></label>
+                    <input type="tel" class="form-control" id="branchPhone" name="telefono" placeholder="Ej: +5492615551234" required>
+                    <div class="invalid-feedback">Por favor, ingresa un teléfono de contacto.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="branchSchedule" class="form-label">Horario de Atención <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="branchSchedule" name="horario" placeholder="Ej: Lunes a Viernes 9:00 - 18:00" required>
+                    <div class="invalid-feedback">Por favor, ingresa el horario de atención.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label d-block">Materiales Reciclables que Acepta <span class="text-danger">*</span></label>
+                    <div class="filtro_container d-flex flex-wrap gap-2" id="materialCategorySelection">
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Papel">Papel</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Cartón">Cartón</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Plástico">Plástico</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Vidrio">Vidrio</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Metal">Metal</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Electrónicos">Electrónicos</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Orgánicos">Orgánicos</button>
+                        <button type="button" class="btn btn-outline-primary category-btn" data-material="Textiles">Textiles</button>
+                    </div>
+                    <input type="hidden" id="selectedMaterialsInput" name="materialesAceptados" required>
+                    <div id="materialTypeError" class="text-danger mt-1" style="display:none;">Por favor, selecciona al menos un tipo de material.</div>
+                    <div id="selectedMaterialsContainer" class="mt-2">
+                        <span class="no-selection-text text-muted">Ningún material seleccionado.</span>
+                        </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Ubicación en el Mapa <span class="text-danger">*</span></label>
+                    <div id="map" style="height: 400px; width: 100%; border-radius: 8px;"></div>
+                    <p class="mt-2 text-muted">Haz clic en el mapa para establecer la ubicación de tu sucursal. Puedes arrastrar el marcador.</p>
+                    <div id="locationInfo" class="mt-2"></div>
+                    <input type="hidden" id="latitude" name="latitud" required>
+                    <input type="hidden" id="longitude" name="longitud" required>
+                    <div id="locationError" class="text-danger mt-1" style="display:none;">Por favor, selecciona una ubicación en el mapa.</div>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="button" class="btn btn-secondary" id="clearFormBtn">Limpiar Formulario</button>
+                    <button type="submit" class="btn btn-primary" id="submitBranchBtn">Registrar Sucursal</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <section class="contactanos_section" id="contacto">
+            <div class="contactanos_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="contactanos_text_container">
+                                <i class="fa-solid fa-envelope"></i>
+                                <h3>Contáctanos</h3>
+                                <p>¿Tienes preguntas o sugerencias? Estamos aquí para ayudarte. No dudes en ponerte en <br>contacto con
+                                    nuestro equipo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="info_contacto_container">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <p>Ubicación</p>
+                                <p>Catamarca 219, Ciudad de Mendoza</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info_contacto_container">
+                                <i class="fa-solid fa-envelope"></i>
+                                <p>Email</p>
+                                <p>ecorecicla@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info_contacto_container">
+                                <i class="fa-solid fa-people-arrows"></i>
+                                <p>Redes Sociales</p>
+                                <p>Catamarca 219, Ciudad de Mendoza</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-    
-  <footer>
-    <section class="contactanos_section" id="contacto">
-      <div class="contactanos_container">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="contactanos_text_container">
-                <i class="fa-solid fa-envelope"></i>
-                <h3>Contáctanos</h3>
-                <p>¿Tienes preguntas o sugerencias? Estamos aquí para ayudarte. No dudes en ponerte en <br>contacto con
-                  nuestro equipo.</p>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="info_contacto_container">
-                <i class="fa-solid fa-location-dot"></i>
-                <p>Ubicación</p>
-                <p>Catamarca 219, Ciudad de Mendoza</p>
-              </div>
+        </section>
+    </footer>
 
-
-            </div>
-            <div class="col-md-4">
-              <div class="info_contacto_container">
-                <i class="fa-solid fa-envelope"></i>
-                <p>Email</p>
-                <p>ecorecicla@gmail.com</p>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info_contacto_container">
-                <i class="fa-solid fa-people-arrows"></i>
-                <p>Redes Sociales</p>
-                <p>Catamarca 219, Ciudad de Mendoza</p>
-              </div>
-
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/e032a44af0.js" crossorigin="anonymous"></script>
     <script src="../statics/js/crear_sucursal.js"></script>
 </body>
 

@@ -43,3 +43,12 @@ main{
 .row .col-md-3{
     margin-top: 5%;
 }
+.link-card:hover {
+    background-color: var(--primario);
+    transition: 0.3s;
+    color: white;
+}
+.link-card{
+    text-decoration: none;
+    color: black;
+}

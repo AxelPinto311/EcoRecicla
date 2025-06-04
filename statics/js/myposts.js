@@ -5,91 +5,104 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchMyPublicationsForm = document.getElementById('searchMyPublicationsForm');
     const myPublicationsSearchInput = document.getElementById('myPublicationsSearchInput');
     const dropdownFilterStatus = document.getElementById('dropdownFilterStatus');
+    const statusFilterLinks = document.querySelectorAll('#dropdownFilterStatus + .dropdown-menu .dropdown-item');
 
     // --- Elementos del DOM para Sucursal ---
     const sucursalInfoCard = document.getElementById('sucursalInfoCard');
     const registerBranchMessage = document.getElementById('registerBranchMessage');
-    const sucursalTab = document.getElementById('sucursal-tab');
+    const branchName = document.getElementById('branchName');
+    const branchAddress = document.getElementById('branchAddress');
+    const branchSchedule = document.getElementById('branchSchedule');
+    const branchPhone = document.getElementById('branchPhone');
+    const branchMaterials = document.getElementById('branchMaterials');
+    const editBranchBtn = document.getElementById('editBranchBtn');
+    const deleteBranchBtn = document.getElementById('deleteBranchBtn');
 
-    // --- Simulación de datos (Reemplazar con llamadas a la API) ---
-    // NOTA: Los estados ahora son 'disponible' o 'vendido'
-    const dummyPublications = [
-        { id: 1, titulo: "Lote de Botellas PET", tipoMaterial: "Plástico PET", precio: 500, estado: "disponible", imagenUrl: "../statics/img/lote_aluminion.png", fechaPublicacion: "01/06/2025" },
-        { id: 2, titulo: "Cartón Ondulado Limpio", tipoMaterial: "Cartón", precio: 350, estado: "disponible", imagenUrl: "../statics/img/carton.png", fechaPublicacion: "28/05/2025" },
-        { id: 3, titulo: "Latas de Aluminio", tipoMaterial: "Metal Aluminio", precio: 700, estado: "disponible", imagenUrl: "../statics/img/lote_aluminion.png", fechaPublicacion: "25/05/2025" },
-        { id: 4, titulo: "Periódicos y Revistas", tipoMaterial: "Papel", precio: 200, estado: "vendido", imagenUrl: "../statics/img/diario.png", fechaPublicacion: "20/05/2025" },
-        { id: 5, titulo: "Envases de Vidrio Transparente", tipoMaterial: "Vidrio", precio: 450, estado: "disponible", imagenUrl: "../statics/img/carton.png", fechaPublicacion: "15/05/2025" },
-        { id: 6, titulo: "Componentes Electrónicos Varios", tipoMaterial: "Electrónicos", precio: 1200, estado: "disponible", imagenUrl: "../statics/img/lote_aluminion.png", fechaPublicacion: "10/05/2025" },
-    ];
+    // --- Funciones para el buscador principal de la navbar (se redirige a publications.html) ---
+    const mainSearchForm = document.getElementById('mainSearchForm');
+    const mainSearchInput = document.getElementById('mainSearchInput');
 
-    let dummyBranch = {
-        id: 101,
-        nombre: "Punto Verde Central",
-        direccion: "Av. Siempre Viva 742",
-        ciudad: "Mendoza",
-        telefono: "261-555-1234",
-        horarios: "Lun-Vie: 9:00-18:00, Sáb: 9:00-13:00",
-        materialesAceptados: ["Plástico", "Cartón", "Papel", "Vidrio", "Metal"],
-        latitud: -32.88946,
-        longitud: -68.84589
-    };
-    // let dummyBranch = null;
+    if (mainSearchForm) {
+        mainSearchForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const searchTerm = mainSearchInput.value.trim();
+            // Redirige a la página de publicaciones con el término de búsqueda
+            window.location.href = `../templates/publications.html?search=${encodeURIComponent(searchTerm)}`;
+        });
+    }
 
-    let currentPublications = [...dummyPublications];
-    let currentFilterStatus = 'todas';
-    let currentSearchTerm = '';
+    // --- Configuración del endpoint de la API ---
+    const API_BASE_URL = 'http://localhost:3000/api'; // Ajusta según tu backend
 
-    // --- Funciones para Publicaciones ---
+    // --- Simulación de usuario logueado (reemplazar con lógica de autenticación real) ---
+    // En un sistema real, este userId vendría de un token JWT o una sesión.
+    // Para propósitos de simulación, lo obtenemos de localStorage o definimos uno fijo.
+    const CURRENT_USER_ID = localStorage.getItem('loggedUserId') || 'user123'; // Simula que 'user123' es el ID del usuario logueado
 
-    function crearCardPublicacion(publicacion) {
-        // Lógica de texto y clase para el estado de la publicación
-        let estadoTexto = '';
-        let estadoBadgeClass = '';
-        let botonEditarDisabled = ''; // Por defecto no deshabilitado
+    let userPublications = []; // Almacenará las publicaciones del usuario
+    let userBranch = null; // Almacenará la sucursal del usuario
+    let currentFilterStatus = 'todos'; // Estado actual del filtro de publicaciones
+    let currentSearchTerm = ''; // Estado actual del término de búsqueda de publicaciones
 
-        if (publicacion.estado === 'disponible') {
-            estadoTexto = 'Disponible';
-            estadoBadgeClass = 'bg-success';
-            botonEditarDisabled = ''; // Habilitado para editar
-        } else if (publicacion.estado === 'vendido') {
-            estadoTexto = 'Vendido';
-            estadoBadgeClass = 'bg-secondary';
-            botonEditarDisabled = 'disabled'; // Deshabilitado para editar
-        } else {
-            // Un estado por defecto si hubiese alguno inesperado, aunque no debería ocurrir con solo 2 opciones
-            estadoTexto = 'Desconocido';
-            estadoBadgeClass = 'bg-info';
-            botonEditarDisabled = 'disabled';
-        }
+    // --- Funciones de Publicaciones ---
+
+    // Función para crear una card de publicación del usuario
+    function crearCardPublicacionUsuario(publicacion) {
+        // Enlace al detalle de la publicación
+        const detailLink = `../templates/publication_detail.html?id=${publicacion.id}`;
+        // Enlace para editar publicación (asumiendo una página de edición como new_publication.html pero precargada)
+        const editLink = `../templates/new_publication.html?id=${publicacion.id}&edit=true`;
+
+        const imageUrl = publicacion.imagenUrl || '../statics/img/placeholder.png';
+        const priceText = publicacion.precio ? `$${publicacion.precio}` : 'Precio a convenir';
+        const statusClass = publicacion.estado === 'disponible' ? 'text-success' : 'text-danger';
+        const statusText = publicacion.estado === 'disponible' ? 'Disponible' : 'Vendido';
 
         return `
             <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
                 <div class="card h-100 shadow-sm">
-                    <img src="${publicacion.imagenUrl || '../statics/img/placeholder.png'}" class="card-img-top" alt="${publicacion.titulo}">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">${publicacion.titulo} <span class="badge ${estadoBadgeClass}">${estadoTexto}</span></h5>
-                        <p class="card-text tipo_material">Tipo de material: ${publicacion.tipoMaterial}</p>
-                        <p class="card-text precio_card">Precio: $${publicacion.precio}</p>
-                        <p class="card-text text-muted small mt-auto">Publicado: ${publicacion.fechaPublicacion}</p>
-                        <div class="d-flex justify-content-between mt-3">
-                            <button class="btn btn-primary btn-sm flex-grow-1 me-2" ${botonEditarDisabled} onclick="editarPublicacion(${publicacion.id})">
-                                <i class="bi bi-pencil-square"></i> Editar
-                            </button>
-                            <button class="btn btn-danger btn-sm flex-grow-1" onclick="eliminarPublicacion(${publicacion.id})">
-                                <i class="bi bi-trash"></i> Eliminar
-                            </button>
+                    <a href="${detailLink}" class="text-decoration-none text-dark">
+                        <img src="${imageUrl}" class="card-img-top" alt="${publicacion.titulo}">
+                        <div class="card-body">
+                            <h5 class="card-title">${publicacion.titulo}</h5>
+                            <p class="card-text tipo_material">Tipo de material: ${publicacion.tipoMaterial || 'No especificado'}</p>
+                            <p class="card-text precio_card">${priceText}</p>
+                            <p class="card-text"><strong class="${statusClass}">Estado: ${statusText}</strong></p>
+                            <p class="card-text"><small class="text-muted">Publicado el: ${publicacion.fechaPublicacion || 'N/A'}</small></p>
                         </div>
+                    </a>
+                    <div class="card-footer d-flex justify-content-around">
+                        <a href="${editLink}" class="btn btn-sm btn-outline-info">Editar</a>
+                        <button class="btn btn-sm btn-outline-danger" onclick="eliminarPublicacion(${publicacion.id})">Eliminar</button>
                     </div>
                 </div>
             </div>
         `;
     }
 
-    function renderizarPublicaciones(publicacionesAmostrar) {
+    // Función para renderizar las publicaciones del usuario
+    function renderizarMisPublicaciones() {
         misPublicacionesContainer.innerHTML = '';
-        if (publicacionesAmostrar.length > 0) {
-            publicacionesAmostrar.forEach(publicacion => {
-                misPublicacionesContainer.innerHTML += crearCardPublicacion(publicacion);
+        let filtered = [...userPublications];
+
+        // Aplicar filtro por estado
+        if (currentFilterStatus !== 'todos') {
+            filtered = filtered.filter(pub => pub.estado === currentFilterStatus);
+        }
+
+        // Aplicar filtro por búsqueda
+        if (currentSearchTerm) {
+            const searchTermLower = currentSearchTerm.toLowerCase();
+            filtered = filtered.filter(pub =>
+                (pub.titulo && pub.titulo.toLowerCase().includes(searchTermLower)) ||
+                (pub.tipoMaterial && pub.tipoMaterial.toLowerCase().includes(searchTermLower)) ||
+                (pub.descripcion && pub.descripcion.toLowerCase().includes(searchTermLower))
+            );
+        }
+
+        if (filtered.length > 0) {
+            filtered.forEach(publicacion => {
+                misPublicacionesContainer.innerHTML += crearCardPublicacionUsuario(publicacion);
             });
             noPublicationsMessage.style.display = 'none';
         } else {
@@ -97,136 +110,149 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function cargarYFiltrarPublicaciones() {
-        let filteredPublications = [...dummyPublications];
-
-        // Aplicar filtro por estado
-        if (currentFilterStatus !== 'todas') {
-            // El filtro ahora es directo a 'disponible' o 'vendido'
-            filteredPublications = filteredPublications.filter(pub => pub.estado === currentFilterStatus);
+    // Función para obtener las publicaciones del usuario desde la API
+    async function fetchUserPublications() {
+        try {
+            const response = await fetch(`${API_BASE_URL}/users/${CURRENT_USER_ID}/publications`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            userPublications = data; // Asumiendo que el backend devuelve un array de publicaciones
+            renderizarMisPublicaciones();
+        } catch (error) {
+            console.error('Error al obtener las publicaciones del usuario:', error);
+            misPublicacionesContainer.innerHTML = '<p class="text-danger">Error al cargar tus publicaciones.</p>';
+            noPublicationsMessage.style.display = 'none';
         }
-
-        // Aplicar filtro por búsqueda
-        if (currentSearchTerm) {
-            const searchTermLower = currentSearchTerm.toLowerCase();
-            filteredPublications = filteredPublications.filter(pub =>
-                pub.titulo.toLowerCase().includes(searchTermLower) ||
-                pub.tipoMaterial.toLowerCase().includes(searchTermLower)
-            );
-        }
-        renderizarPublicaciones(filteredPublications);
     }
 
-    // --- Funciones para Sucursal (sin cambios en esta parte) ---
+    // Función global para eliminar publicación (accesible desde el HTML)
+    window.eliminarPublicacion = async function(idPublicacion) {
+        if (confirm('¿Estás seguro de que quieres eliminar esta publicación? Esta acción no se puede deshacer.')) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/publications/${idPublicacion}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('userToken')}` // Envía un token de autenticación
+                    }
+                });
 
-    function crearCardSucursal(sucursal) {
-        if (!sucursal) {
-            return `
-                <div class="card-body text-center">
-                    <p class="card-text text-muted">No hay información de sucursal disponible.</p>
-                </div>
-            `;
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                alert('Publicación eliminada con éxito!');
+                fetchUserPublications(); // Volver a cargar las publicaciones para actualizar la lista
+            } catch (error) {
+                console.error('Error al eliminar la publicación:', error);
+                alert(`Error al eliminar la publicación: ${error.message || 'Hubo un problema.'}`);
+            }
         }
+    };
 
-        return `
-            <div class="card-header bg-success text-white">
-                <h5 class="mb-0"><i class="bi bi-shop"></i> ${sucursal.nombre}</h5>
-            </div>
-            <div class="card-body">
-                <p class="card-text"><strong>Dirección:</strong> ${sucursal.direccion}, ${sucursal.ciudad}</p>
-                <p class="card-text"><strong>Teléfono:</strong> ${sucursal.telefono}</p>
-                <p class="card-text"><strong>Horarios:</strong> ${sucursal.horarios}</p>
-                <p class="card-text"><strong>Materiales aceptados:</strong> ${sucursal.materialesAceptados.join(', ')}</p>
-                <div class="d-flex justify-content-between mt-3">
-                    <button class="btn btn-primary btn-sm flex-grow-1 me-2" onclick="editarSucursal(${sucursal.id})">
-                        <i class="bi bi-pencil-square"></i> Editar Sucursal
-                    </button>
-                    <button class="btn btn-danger btn-sm flex-grow-1" onclick="eliminarSucursal(${sucursal.id})">
-                        <i class="bi bi-trash"></i> Eliminar Sucursal
-                    </button>
-                </div>
-            </div>
-        `;
-    }
+    // --- Funciones de Sucursal ---
 
+    // Función para renderizar la información de la sucursal
     function renderizarSucursal() {
-        if (dummyBranch) {
-            sucursalInfoCard.innerHTML = crearCardSucursal(dummyBranch);
+        if (userBranch) {
+            branchName.textContent = userBranch.nombre || 'Sin nombre';
+            branchAddress.textContent = userBranch.direccion || 'Sin dirección';
+            branchSchedule.textContent = userBranch.horario || 'Sin horario';
+            branchPhone.textContent = userBranch.telefono || 'Sin teléfono';
+            branchMaterials.textContent = userBranch.materialesAceptados && userBranch.materialesAceptados.length > 0
+                ? userBranch.materialesAceptados.join(', ')
+                : 'Ninguno especificado';
+
             sucursalInfoCard.style.display = 'block';
             registerBranchMessage.style.display = 'none';
+
+            // Configurar botones de editar/eliminar con el ID de la sucursal
+            editBranchBtn.onclick = () => window.location.href = `../templates/crear_sucursal.html?id=${userBranch.id}&edit=true`;
+            deleteBranchBtn.onclick = () => eliminarSucursal(userBranch.id);
+
         } else {
-            sucursalInfoCard.innerHTML = crearCardSucursal(null); // Para mostrar el mensaje interno de la card si no hay sucursal
-            sucursalInfoCard.style.display = 'none'; // Oculta la card
-            registerBranchMessage.style.display = 'block'; // Muestra el mensaje para registrar
+            sucursalInfoCard.style.display = 'none';
+            registerBranchMessage.style.display = 'block';
         }
     }
 
-    // --- Manejadores de eventos para Publicaciones ---
+    // Función para obtener la sucursal del usuario desde la API
+    async function fetchUserBranch() {
+        try {
+            const response = await fetch(`${API_BASE_URL}/users/${CURRENT_USER_ID}/branch`);
+            if (!response.ok) {
+                if (response.status === 404) {
+                    userBranch = null; // No hay sucursal para este usuario
+                } else {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+            } else {
+                userBranch = await response.json(); // Asumiendo que el backend devuelve un objeto de sucursal
+            }
+            renderizarSucursal();
+        } catch (error) {
+            console.error('Error al obtener la sucursal del usuario:', error);
+            sucursalInfoCard.innerHTML = '<p class="text-danger">Error al cargar los datos de tu sucursal.</p>';
+            registerBranchMessage.style.display = 'none';
+        }
+    }
+
+    // Función global para eliminar sucursal (accesible desde el HTML)
+    window.eliminarSucursal = async function(idSucursal) {
+        if (confirm('¿Estás seguro de que quieres eliminar tu sucursal? Esta acción no se puede deshacer.')) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/branches/${idSucursal}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('userToken')}` // Envía un token de autenticación
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                alert('Sucursal eliminada con éxito!');
+                userBranch = null; // Establecer a null para que se muestre el botón de registrar
+                renderizarSucursal(); // Actualizar la interfaz
+            } catch (error) {
+                console.error('Error al eliminar la sucursal:', error);
+                alert(`Error al eliminar la sucursal: ${error.message || 'Hubo un problema.'}`);
+            }
+        }
+    };
+
+
+    // --- Event Listeners para filtros y búsqueda de publicaciones ---
     searchMyPublicationsForm.addEventListener('submit', function(event) {
         event.preventDefault();
         currentSearchTerm = myPublicationsSearchInput.value.trim();
-        cargarYFiltrarPublicaciones();
+        renderizarMisPublicaciones();
     });
 
-    document.querySelectorAll('#dropdownFilterStatus + .dropdown-menu .dropdown-item').forEach(item => {
-        item.addEventListener('click', function(event) {
+    myPublicationsSearchInput.addEventListener('input', function() {
+        if (this.value.trim() === '' && currentSearchTerm !== '') {
+            currentSearchTerm = '';
+            renderizarMisPublicaciones();
+        }
+    });
+
+    statusFilterLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
             event.preventDefault();
-            currentFilterStatus = this.dataset.filterStatus;
-            // Actualiza el texto del botón del dropdown
-            dropdownFilterStatus.innerHTML = `<i class="bi bi-funnel"></i> Filtrar por estado: ${this.textContent}`;
-            cargarYFiltrarPublicaciones();
+            currentFilterStatus = this.dataset.status;
+            dropdownFilterStatus.textContent = `Filtrar por Estado: ${this.textContent}`;
+            renderizarMisPublicaciones();
         });
     });
 
-    // --- Manejadores de eventos para Tabs ---
-    const myTabs = document.getElementById('myTabs');
-    myTabs.addEventListener('shown.bs.tab', function (event) {
-        if (event.target.id === 'sucursal-tab') {
-            renderizarSucursal();
-        } else if (event.target.id === 'publicaciones-tab') {
-            cargarYFiltrarPublicaciones();
-        }
-    });
+    // --- Carga inicial de datos al cargar la página ---
+    fetchUserPublications();
+    fetchUserBranch();
 
-    // --- Funciones de acción para Publicaciones (globales) ---
-    window.editarPublicacion = function(idPublicacion) {
-        console.log('Editar publicación con ID:', idPublicacion);
-        alert(`Simulando: Redirigiendo para editar la publicación ${idPublicacion}`);
-        // En una aplicación real, redirigirías a la página de edición con el ID:
-        // window.location.href = `/templates/edit_publication.html?id=${idPublicacion}`;
-    };
-
-    window.eliminarPublicacion = function(idPublicacion) {
-        if (confirm('¿Estás seguro de que quieres eliminar esta publicación? Esta acción no se puede deshacer.')) {
-            const index = dummyPublications.findIndex(pub => pub.id === idPublicacion);
-            if (index > -1) {
-                dummyPublications.splice(index, 1);
-                cargarYFiltrarPublicaciones();
-                alert('Publicación eliminada con éxito (simulado).');
-            } else {
-                alert('Publicación no encontrada.');
-            }
-            // Aquí iría tu fetch real (DELETE /api/publicaciones/{id})
-        }
-    };
-
-    // --- Funciones de acción para Sucursal (globales) ---
-    window.editarSucursal = function(idSucursal) {
-        console.log('Editar sucursal con ID:', idSucursal);
-        alert(`Simulando: Redirigiendo para editar la sucursal ${idSucursal}`);
-        // window.location.href = `/templates/edit_branch.html?id=${idSucursal}`;
-    };
-
-    window.eliminarSucursal = function(idSucursal) {
-        if (confirm('¿Estás seguro de que quieres eliminar tu sucursal? Esta acción no se puede deshacer.')) {
-            console.log('Eliminar sucursal con ID:', idSucursal);
-            dummyBranch = null; // Simulación: establece la sucursal a null
-            renderizarSucursal(); // Vuelve a renderizar para mostrar el estado "no hay sucursal"
-            alert('Sucursal eliminada con éxito (simulado).');
-            // Aquí iría tu fetch real (DELETE /api/sucursales/{id})
-        }
-    };
-
-    // --- Carga inicial al cargar la página ---
-    cargarYFiltrarPublicaciones();
+    // Simulación de login para pruebas (borrar en producción con un sistema de login real)
+    if (!localStorage.getItem('loggedUserId')) {
+        localStorage.setItem('loggedUserId', 'user123'); // Guarda un ID de usuario dummy al iniciar por primera vez
+    }
 });
