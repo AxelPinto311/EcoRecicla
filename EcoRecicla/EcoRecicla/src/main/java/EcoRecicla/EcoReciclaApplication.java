@@ -1,13 +1,11 @@
 package EcoRecicla;
 
-import EcoRecicla.model.entity.Category;
-import EcoRecicla.model.entity.Product;
-import EcoRecicla.model.entity.Role;
-import EcoRecicla.model.entity.User;
+import EcoRecicla.model.entity.*;
 import EcoRecicla.model.enums.CategoryEnum;
 import EcoRecicla.model.enums.Proveedor;
 import EcoRecicla.model.enums.RoleEnum;
 import EcoRecicla.repository.CategoryRepository;
+import EcoRecicla.repository.ImageRepository;
 import EcoRecicla.repository.ProductRepository;
 import EcoRecicla.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -16,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
@@ -25,10 +24,10 @@ public class EcoReciclaApplication {
 		SpringApplication.run(EcoReciclaApplication.class, args);
 	}
 
-	/*@Bean
-	CommandLineRunner initData(UserRepository userRepository, PasswordEncoder passwordEncoder, ProductRepository productRepository, CategoryRepository categoryRepository) {
+	@Bean
+	CommandLineRunner initData(UserRepository userRepository, PasswordEncoder passwordEncoder, ProductRepository productRepository, CategoryRepository categoryRepository, ImageRepository imageRepository) {
 		return args -> {
-			Role role = Role.builder()
+			/*Role role = Role.builder()
 					.roleEnum(RoleEnum.USER)
 					.build();
 
@@ -88,17 +87,8 @@ public class EcoReciclaApplication {
 			categoryRepository.save(category7);
 			categoryRepository.save(category8);
 
-			Product product = Product.builder()
-					.name("Cajas")
-					.price(2000.00)
-					.description("Este carton esta good")
-					.image("imagen.pene")
-					.categories(Set.of(category))
-					.users(user)
-					.build();
-
-			productRepository.save(product);
+			*/
 		};
-	}*/
+	}
 
 }

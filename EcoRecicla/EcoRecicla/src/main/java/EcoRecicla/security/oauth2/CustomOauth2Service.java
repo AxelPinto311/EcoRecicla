@@ -65,7 +65,7 @@ public class CustomOauth2Service extends OidcUserService {
             throw new IllegalArgumentException("No se puede registrar el usuario");
         }
         User user=User.builder()
-                .username(oidcUser.getAttribute("name"))
+                .username(this.assignName(oidcUser.getAttribute("name"),oidcUser.getAttribute("email")))
                 .email(oidcUser.getAttribute("email"))
                 .password("GOOGLE_AUTH")
                 .proveedor(Proveedor.valueOf(provider.toUpperCase()))
@@ -75,6 +75,18 @@ public class CustomOauth2Service extends OidcUserService {
 
 
         return userRepository.save(user);
+    }
+
+    private String assignName(String username, String email) {
+        int count=0;
+        String name=username;
+
+        while(userRepository.existsUserByUsername(name)){
+            count++;
+            name=email.split("@")[0] + count;
+        }
+
+        return name;
     }
 
 }

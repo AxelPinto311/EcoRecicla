@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 public record ProductResponse(
-        List<Product> products,
+        List<ProductDto> products,
         int currentPage,
         int totalPages,
         long totalElements,
@@ -16,7 +16,9 @@ public record ProductResponse(
         String searchTerm
 ) {
 
-    public static ProductResponse from(Page<Product> page, String searchTerm) {
+
+
+    public static ProductResponse from(Page<ProductDto> page, String searchTerm) {
         return new ProductResponse(
                 page.getContent(),
                 page.getNumber(),
@@ -29,7 +31,7 @@ public record ProductResponse(
         );
     }
 
-    public static ProductResponse from(Page<Product> page) {
+    public static ProductResponse from(Page<ProductDto> page) {
         return from(page, null);
     }
 
