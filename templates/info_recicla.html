@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../statics/css/publications.css">
+
     <link rel="stylesheet" href="../statics/css/header-log.css">
     <link rel="stylesheet" href="../statics/css/footer.css">
-
+<link rel="stylesheet" href="../agregar/ReciclaPage.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
-    <title>Publicaciones</title>
+    <title>Cómo reciclar</title>
 </head>
 
 <body>
@@ -71,28 +71,72 @@
         <section>
             <div class="container">
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="filtro_container">
-                            <input type="button" class="btn" value="papel" data-material="papel">
-                            <input type="button" value="Cartón" class="btn" data-material="carton">
-                            <input type="button" value="Plástico" class="btn" data-material="plastico">
-                            <input type="button" value="Vidrio" class="btn" data-material="vidrio">
-                            <input type="button" value="Metal" class="btn" data-material="metal">
-                            <input type="button" value="Electrónicos" class="btn" data-material="electronicos">
-                            <input type="button" value="Orgánicos" class="btn" data-material="organicos">
-                            <input type="button" value="Textiles" class="btn" data-material="textiles">
-                            <input type="button" value="Todas" class="btn btn-primary" data-material="todas">
-                        </div>
-                    </div>
-                </div>
-                <div class="row" id="publicationsContainer">
-                    </div>
-                <div class="row mt-4" id="noPublicationsMessage" style="display: none;">
-                    <div class="col-12 text-center">
-                        <p class="lead text-muted">No se encontraron publicaciones que coincidan con tu búsqueda.</p>
-                    </div>
-                </div>
+                <div className="recicla-main-content">
+                    <h1 className="mb-4">Aprender a Reciclar</h1>
+              
+                    <section className="mb-4">
+                      <p>
+                        Reciclar es el proceso mediante el cual transformamos residuos en nuevos productos o materias primas.
+                        Esto permite reducir la contaminación, ahorrar recursos naturales y disminuir la cantidad de basura que generamos diariamente.
+                      </p>
+                      <p>
+                        Reciclar no solo ayuda al planeta, sino que también promueve una vida más consciente y sostenible.
+                        Si querés comenzar a reciclar pero no sabés por dónde empezar, esta guía está pensada para vos.
+                      </p>
+                    </section>
+              
+                    <section className="mb-4">
+                      <h2>¿Cómo Separar los Residuos?</h2>
+                      <ol>
+                        <li>
+                          <strong>Usá 3 tachos o bolsas de distinto color:</strong>
+                          <ul>
+                            <li><strong>Secos reciclables (verde/azul):</strong> papel, cartón, plástico limpio, vidrio, metales.</li>
+                            <li><strong>Húmedos u orgánicos (negro):</strong> restos de comida, yerba, cáscaras.</li>
+                            <li><strong>No reciclables (rojo):</strong> pañales, colillas, toallitas, cartón sucio.</li>
+                          </ul>
+                        </li>
+                        <li><strong>Limpiá los reciclables</strong> antes de tirarlos. Ejemplo: enjuagá una botella de yogur.</li>
+                        <li><strong>Compactá</strong> todo lo posible: plegá cajas, aplastá botellas, etc.</li>
+                      </ol>
+                    </section>
+              
+                    <section className="mb-4">
+                      <h2>¿Qué NO se recicla?</h2>
+                      <ul>
+                        <li>Papel o cartón sucios con comida o grasa.</li>
+                        <li>Vidrios rotos o espejos.</li>
+                        <li>Bolsas metalizadas (como las de snacks).</li>
+                        <li>Pañales, toallitas, elementos de higiene personal.</li>
+                      </ul>
+                    </section>
+              
+                    <section className="mb-4">
+                      <h2>¿Qué SÍ se recicla?</h2>
+                      <ul>
+                        <li>Botellas y tapitas de plástico.</li>
+                        <li>Cartón y papel limpio.</li>
+                        <li>Latas de aluminio.</li>
+                        <li>Frascos y botellas de vidrio.</li>
+                        <li>Envases de tetra pak (limpios y secos).</li>
+                      </ul>
+                    </section>
+              
+                    <section className="mb-4">
+                      <h2>Tips para Reciclar Mejor</h2>
+                      <ul>
+                        <li>Colocá carteles o colores en cada tacho.</li>
+                        <li>Participá en campañas barriales.</li>
+                        <li>Llevá los reciclables a puntos verdes.</li>
+                        <li>Reutilizá antes de desechar.</li>
+                      </ul>
+                    </section>
+              
+                    <section className="highlight-box">
+                      <h3>🌍 ¡Sumate al cambio!</h3>
+                      <p>Cada pequeño gesto cuenta. Separar tus residuos es el primer paso hacia un futuro más limpio.</p>
+                    </section>
+                  </div>
             </div>
         </section>
     </main>
@@ -141,7 +185,7 @@
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/e032a44af0.js" crossorigin="anonymous"></script>
-    <script src="../statics/js/publications.js"></script>
+    
 </body>
 
 </html>

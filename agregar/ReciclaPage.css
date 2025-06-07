@@ -1,0 +1,57 @@
+.recicla-main-content {
+  background-color: var(--background);
+  padding: 2rem;
+  min-height: calc(100vh - 120px);
+  color: var(--texto-principal);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.recicla-main-content h1,
+.recicla-main-content h2,
+.recicla-main-content h3 {
+  color: var(--primario);
+  margin-bottom: 1rem;
+}
+
+.recicla-main-content section {
+  margin-bottom: 2rem;
+  background-color: var(--blanco);
+  border: 1px solid var(--borde-claro);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.recicla-main-content p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.recicla-main-content ul,
+.recicla-main-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.recicla-main-content ul li,
+.recicla-main-content ol li {
+  margin-bottom: 0.5rem;
+}
+
+.recicla-main-content ul li::marker,
+.recicla-main-content ol li::marker {
+  color: var(--primario);
+}
+
+.recicla-main-content strong {
+  color: var(--texto-principal);
+}
+
+.recicla-main-content .highlight-box {
+  background-color: var(--primario);
+  color: var(--blanco);
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+}
