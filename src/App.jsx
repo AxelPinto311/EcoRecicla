@@ -9,6 +9,10 @@ import PublicationsPage from './pages/PublicationsPage.jsx';
 import Footer from './components/Footer.jsx';
 import Header from './components/Header.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import CreateBranchForm from './components/CreateBranchForm';
+import NewPublicationForm from './components/NewPublicationForm';
+import MyPosts from './components/MyPosts';
+import PublicationDetail from './components/PublicationDetail';
 import { useAuth } from './hooks/useAuth.jsx';
 import './App.css';
 
@@ -28,6 +32,10 @@ function App() {
         {/* Rutas protegidas solo para usuarios autenticados */}
         <Route element={<ProtectedRoute />}>
           <Route path="/publications" element={<PublicationsPage />} />
+          <Route path="/publications/:id" element={<PublicationDetail />} />
+          <Route path="/my-posts" element={<MyPosts />} />
+          <Route path="/create-branch" element={<CreateBranchForm />} />
+          <Route path="/new-publication" element={<NewPublicationForm />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />

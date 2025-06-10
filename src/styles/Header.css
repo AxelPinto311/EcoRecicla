@@ -252,3 +252,32 @@ header#app-header .navbar-nav .nav-link:not(.btn-like) {
 header#app-header .navbar-nav .nav-link:not(.btn-like):hover {
   color: var(--primario);
 }
+
+/* Estilos para los nuevos botones */
+header#app-header .nav-link.btn-like.btn-mis-publicaciones,
+header#app-header .nav-link.btn-like.btn-nueva-publicacion,
+header#app-header .nav-link.btn-like.btn-crear-sucursal {
+  background-color: var(--primario);
+  color: var(--blanco);
+  border-color: var(--primario);
+  transition: all 0.2s;
+}
+
+header#app-header .nav-link.btn-like.btn-mis-publicaciones:hover,
+header#app-header .nav-link.btn-like.btn-nueva-publicacion:hover,
+header#app-header .nav-link.btn-like.btn-crear-sucursal:hover {
+  background-color: #148a3f;
+  border-color: #148a3f;
+}
+
+/* Ajustes responsive */
+@media (max-width: 991.98px) {
+  header#app-header .navbar-nav {
+    gap: 0.5rem;
+  }
+  
+  header#app-header .nav-link.btn-like {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -45,8 +45,9 @@ function Header() {
     <header id="app-header">
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <Link className="navbar-brand ecorecicla_log" to={isAuthenticated ? "/publications" : "/"}
-            onClick={() => setIsNavCollapsed(true)}>
+          <Link 
+            className="navbar-brand ecorecicla_log" 
+            to={isAuthenticated ? "/publications" : "/"}>
             EcoRecicla
           </Link>
 
@@ -80,31 +81,52 @@ function Header() {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div
-            className={`collapse navbar-collapse ul_container ${!isNavCollapsed ? 'show' : ''}`}
-            id="navbarScroll"
-          >
+          <div className={`collapse navbar-collapse ul_container ${!isNavCollapsed ? 'show' : ''}`}>
             {isAuthenticated ? (
-              // Navbar para usuarios autenticados
               <ul className="navbar-nav mb-2 mb-lg-0 ms-auto">
                 <li className="nav-item">
-                  <Link className="nav-link btn-like btn-publicaciones" to="/publications" onClick={() => setIsNavCollapsed(true)}>
+                  <Link 
+                    className="nav-link btn-like btn-publicaciones" 
+                    to="/publications" 
+                    onClick={() => setIsNavCollapsed(true)}
+                  >
                     Publicaciones
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link btn-like btn-mapa" to="/#mapa_verde_section" onClick={() => setIsNavCollapsed(true)}>
-                    <FontAwesomeIcon icon={faMapMarkerAlt} /> Mapa
+                  <Link 
+                    className="nav-link btn-like btn-mis-publicaciones" 
+                    to="/my-posts" 
+                    onClick={() => setIsNavCollapsed(true)}
+                  >
+                    Mis Publicaciones
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link btn-like btn-nueva-publicacion" to="/new-publication" onClick={() => setIsNavCollapsed(true)}>
+                  <Link 
+                    className="nav-link btn-like btn-nueva-publicacion" 
+                    to="/new-publication" 
+                    onClick={() => setIsNavCollapsed(true)}
+                  >
                     + Nueva Publicación
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link btn-like btn-contacto" to="/#contacto" onClick={() => setIsNavCollapsed(true)}>
-                    Contacto
+                  <Link 
+                    className="nav-link btn-like btn-crear-sucursal" 
+                    to="/create-branch" 
+                    onClick={() => setIsNavCollapsed(true)}
+                  >
+                    + Nueva Sucursal
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link 
+                    className="nav-link btn-like btn-mapa" 
+                    to="/#mapa_verde_section" 
+                    onClick={() => setIsNavCollapsed(true)}
+                  >
+                    <FontAwesomeIcon icon={faMapMarkerAlt} /> Mapa
                   </Link>
                 </li>
                 <li className="nav-item dropdown">
