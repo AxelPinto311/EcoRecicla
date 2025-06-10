@@ -24,10 +24,10 @@ public class EcoReciclaApplication {
 		SpringApplication.run(EcoReciclaApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	CommandLineRunner initData(UserRepository userRepository, PasswordEncoder passwordEncoder, ProductRepository productRepository, CategoryRepository categoryRepository, ImageRepository imageRepository) {
 		return args -> {
-			/*Role role = Role.builder()
+			Role role = Role.builder()
 					.roleEnum(RoleEnum.USER)
 					.build();
 
@@ -87,8 +87,8 @@ public class EcoReciclaApplication {
 			categoryRepository.save(category7);
 			categoryRepository.save(category8);
 
-			*/
+
 		};
-	}
+	}*/
 
 }

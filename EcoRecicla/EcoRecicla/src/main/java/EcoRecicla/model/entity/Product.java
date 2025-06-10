@@ -22,7 +22,8 @@ public class Product {
     private String description;
     @Column(nullable = false)
     private Double price;
-
+    @Column(nullable = false)
+    private String contact;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Image> images;

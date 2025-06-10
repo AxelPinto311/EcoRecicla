@@ -1,4 +1,6 @@
 package EcoRecicla.model.dto;
 
-public record ImageDto(String url) {
+import jakarta.validation.constraints.NotBlank;
+
+public record ImageDto(@NotBlank String url) {
 }

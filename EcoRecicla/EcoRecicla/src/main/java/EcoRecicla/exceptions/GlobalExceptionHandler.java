@@ -119,5 +119,16 @@ public class GlobalExceptionHandler{
         return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(UserAlreadyHasLocationException.class)
+    public ResponseEntity<ErrorDetails> handleUserAlreadyHasLocation(UserAlreadyHasLocationException ex, WebRequest request){
+        ErrorDetails errorDetails= new ErrorDetails(
+                LocalDateTime.now(),
+                ex.getMessage(),
+                request.getDescription(false),
+                HttpStatus.CONFLICT.value()
+        );
+        return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
+    }
+
 
 }

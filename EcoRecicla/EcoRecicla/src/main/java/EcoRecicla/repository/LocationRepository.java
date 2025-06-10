@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Long> {
+    boolean existsLocationByUser_Id(Long userId);
+    void deleteLocationByUser_Id(Long userId);
 }

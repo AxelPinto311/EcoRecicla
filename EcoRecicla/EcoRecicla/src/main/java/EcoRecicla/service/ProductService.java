@@ -88,6 +88,11 @@ public class ProductService {
         return ProductResponse.from(productDtoPage);
     }
 
+    public ProductDto getProductById(Long id) {
+        Product product= productRepository.findProductsById(id);
+        return productMapper.toDto(product);
+    }
+
     @Transactional
     public ProductDto createProduct(ProductCreationDto productCreationDto) {
         Product product = productMapper.toEntity(productCreationDto);

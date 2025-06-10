@@ -53,6 +53,11 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductsByUser(userId));
     }
 
+    @GetMapping("findById/{id}")
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.getProductById(id));
+    }
+
 
     @PatchMapping("/updatePrduct")
     public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) {
