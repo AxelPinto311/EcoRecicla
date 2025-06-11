@@ -22,7 +22,7 @@ function LoginForm() {
   const [successMessage, setSuccessMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { loginContext } = useAuth();
+  const { loginContext, loginWithGoogle } = useAuth();
 
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -34,36 +34,30 @@ function LoginForm() {
     setLoading(true);
 
     try {
-      await axios.post(`${apiBaseUrl}/auth/login`, {
+      const success = await loginContext({
         email: email,
         password: password,
       });
 
-      loginContext({ username: email.split('@')[0], email: email });
-
-      setLoading(false);
-      setSuccessMessage('¡Bienvenido de nuevo! Redirigiendo...');
-
-      setTimeout(() => {
-        navigate('/publications');
-      }, 1500);
-
-    } catch (err) {
-      setLoading(false);
-      console.error('Error en el inicio de sesión:', err);
-      if (err.response) {
-        setError(err.response.data?.message || err.response.data?.error || 'Correo electrónico o contraseña incorrectos.');
-      } else if (err.request) {
-        setError('No se pudo conectar al servidor. Inténtalo más tarde.');
+      if (success) {
+        setSuccessMessage('¡Bienvenido de nuevo! Redirigiendo...');
+        setTimeout(() => {
+          navigate('/publications', { replace: true });
+        }, 1000);
       } else {
-        setError('Ocurrió un error inesperado.');
+        setError('Error al iniciar sesión. Verifica tus credenciales.');
       }
+    } catch (err) {
+      setError('Error al iniciar sesión. Verifica tus credenciales.', err);
+    } finally {
+      setLoading(false);
     }
   };
 
   // Login con Google
-  const handleGoogleLogin = () => {
-    window.location.href = `${apiBaseUrl}/oauth2/authorization/google`;
+  const handleGoogleLogin = (e) => {
+    e.preventDefault();
+    loginWithGoogle();
   };
 
   return (
@@ -109,15 +103,17 @@ function LoginForm() {
           <span className="or-text">o</span>
         </div>
 
-        <button
-          type="button"
-          className="google-login-button"
-          onClick={handleGoogleLogin}
-          disabled={loading}
-        >
-          <GoogleIcon />
-          Continuar con Google
-        </button>
+        <div className="social-login">
+          <button 
+            type="button"
+            onClick={handleGoogleLogin}
+            className="google-btn"
+            disabled={loading}
+          >
+            <GoogleIcon />
+            Continuar con Google
+          </button>
+        </div>
 
         <p className="login-link">
           ¿No tienes una cuenta?{' '}
